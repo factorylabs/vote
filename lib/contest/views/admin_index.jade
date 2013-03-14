@@ -1,0 +1,24 @@
+extend layout
+
+block content
+  h3 Admin
+  if contests.length == 0
+    p: small No contests
+  else
+    table.table
+      thead
+        tr
+          th Contest
+          th Entries
+      tbody
+        for contest in contests
+          tr
+            td: a(href="/admin/contests/#{contest.id}")= contest.name
+            td= contest.entries.length
+
+  hr
+
+  h4 Create New Contest
+  form.form-inline(action='/admin/contests', method='POST')
+    input(type='text', name='name', placeholder='Name')
+    input.btn(type='submit')

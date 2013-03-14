@@ -1,0 +1,32 @@
+extend layout
+
+block content
+  h3= contest.name
+  if contest.entries.length == 0
+    p: small No entries
+  else
+    ul.thumbnails
+      for entry in contest.entries
+        li.span2: div.thumbnail
+          img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+          h5
+            = entry.name
+            span.badge.pull-right= entry.votes
+
+  hr
+
+  h4 Add Entry to Contest
+  form.form-horizontal(action="/admin/contests/#{contest.id}/entries", method='POST')
+    .control-group
+      label.control-label
+        | Entry Name
+      .controls
+        input.input-large(type='text', name='name', placeholder='Best photo evar!')
+    .control-group
+      label.control-label
+        | Photo Slug
+      .controls
+        input.input-small(type='text', name='slug', placeholder='WiNZqZEGzu')
+    .control-group
+      .controls
+        input.btn(type='submit')

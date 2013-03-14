@@ -1,0 +1,25 @@
+!!! 5
+html
+  head
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    != css('application')
+  body
+    .container
+      .row
+        .span10.offset1
+          h2 Factory Contests
+      .row
+        .span8.offset1
+          block content
+        .span2
+          ul.nav.nav-tabs.nav-stacked
+            li: a(href='/admin') Admin
+            li: a(href='/contests') All Contests
+            if user
+              li: a(href='/logout') Logout
+            else
+              li: a(href='/auth/google') Login
+
+    script(src='//code.jquery.com/jquery-1.9.1.min.js')
+    script(src='/js/bootstrap.min.js')
+    != js('application')
