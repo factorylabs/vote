@@ -11,10 +11,6 @@
     "passport": "~0.1.16",
     "passport-google": "~0.3.0"
   },
-  "subdomain": "voting",
-  "scripts": {
-    "start": "app.coffee"
-  },
   "engines": {
     "node": "0.8.x"
   }
