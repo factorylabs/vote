@@ -2,7 +2,6 @@ express        = require('express')
 passport       = require('passport')
 GoogleStrategy = require('passport-google').Strategy
 User           = require('../user').Model
-config         = require('../../settings.json')
 
 # Passport session setup.
 passport.serializeUser (user, done) ->
@@ -38,7 +37,7 @@ app = module.exports.Router = express()
 app.use(express.cookieParser())
 app.use(express.bodyParser())
 app.use(express.methodOverride())
-app.use(express.session({secret: config.secret}))
+app.use(express.session({secret: 'yellow snow'}))
 # Initialize Passport!  Also use passport.session() middleware, to support
 # persistent login sessions (recommended).
 app.use(passport.initialize())

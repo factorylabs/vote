@@ -1,5 +1,4 @@
 express = require('express')
-config  = require('./settings.json')
 
 app = express()
 app.set('views', "#{__dirname}/lib/views")
