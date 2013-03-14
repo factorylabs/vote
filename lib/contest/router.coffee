@@ -52,6 +52,7 @@ app.get '/admin/contests', check_admin, (req, res) ->
       contests: contests
       user: req.user
 
+# Admin can create a Contest
 app.post '/admin/contests', check_admin, (req, res) ->
   body = req.body
   contest = new Contest(body)

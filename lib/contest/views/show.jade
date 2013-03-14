@@ -14,11 +14,13 @@ block content
           h6 You have already voted.
           ul.thumbnails
             for entry in category.entries
-              li.span2: .thumbnail
-                img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+              li.span2(rel='popover', data-content='<img width=306 height=306 src="http://instagr.am/p/#{entry.slug}/media/?size=m" />')
+                .thumbnail
+                  img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
         else
           h5 Click to vote:
           ul.thumbnails
             for entry in category.entries
-              li.span2: a.thumbnail(href="/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}/vote")
-                img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+              li.span2(rel='popover', data-content='<img width=306 height=306 src="http://instagr.am/p/#{entry.slug}/media/?size=m" />')
+                a.thumbnail(href="/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}/vote")
+                  img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
