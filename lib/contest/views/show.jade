@@ -2,19 +2,23 @@ extend layout
 
 block content
   h3= contest.name
-  pre.hide= contest
-  if contest.entries.length == 0
-    p: small No entries
+  if contest.categories.length == 0
+    p: small No categories
   else
-    if contest.voted_on_by(user)
-      h6 You have already voted.
-      ul.thumbnails
-        for entry in contest.entries
-          li.span2: .thumbnail
-            img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
-    else
-      h4 Click to vote:
-      ul.thumbnails
-        for entry in contest.entries
-          li.span2: a.thumbnail(href="/contests/#{contest.id}/entries/#{entry.id}/vote")
-            img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+    for category in contest.categories
+      h4= category.name
+      if category.entries.length == 0
+        p: small No entries
+      else
+        if category.voted_on_by(user)
+          h6 You have already voted.
+          ul.thumbnails
+            for entry in category.entries
+              li.span2: .thumbnail
+                img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+        else
+          h5 Click to vote:
+          ul.thumbnails
+            for entry in category.entries
+              li.span2: a.thumbnail(href="/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}/vote")
+                img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")

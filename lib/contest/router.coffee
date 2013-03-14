@@ -25,16 +25,18 @@ app.get '/contests/:id', auth.ensureAuthenticated, (req, res) ->
       user: req.user
 
 # User vote
-app.get '/contests/:contest_id/entries/:entry_id/vote', [auth.ensureAuthenticated], (req, res) ->
+app.get '/contests/:contest_id/categories/:category_id/entries/:entry_id/vote', [auth.ensureAuthenticated], (req, res) ->
   Contest.findById req.params.contest_id, (err, contest) ->
-    if contest.voted_on_by(req.user)
+    category = contest.categories.id(req.params.category_id)
+
+    if category.voted_on_by(req.user)
       res.send 418
     else
-      entry = contest.entries.id(req.params.entry_id)
+      entry = category.entries.id(req.params.entry_id)
 
       if entry?
         entry.votes++
-        contest.voted.push(req.user.email)
+        category.voted.push(req.user.email)
 
         contest.save (err) ->
           res.redirect("/contests/#{contest.id}")
@@ -62,9 +64,18 @@ app.get '/admin/contests/:id', check_admin, (req, res) ->
       contest: contest
       user: req.user
 
-# Admin can add entry to Contest
-app.post '/admin/contests/:contest_id/entries', check_admin, (req, res) ->
+# Admin can add Category to Contest
+app.post '/admin/contests/:contest_id/categories', check_admin, (req, res) ->
   Contest.findById req.params.contest_id, (err, contest) ->
-    contest.entries.push req.body
+    contest.categories.push req.body
+    contest.save (err) ->
+      res.redirect("/admin/contests/#{contest.id}")
+
+
+# Admin can add Entry to Category
+app.post '/admin/contests/:contest_id/categories/:category_id/entries', check_admin, (req, res) ->
+  Contest.findById req.params.contest_id, (err, contest) ->
+    category = contest.categories.id(req.params.category_id)
+    category.entries.push req.body
     contest.save (err) ->
       res.redirect("/admin/contests/#{contest.id}")

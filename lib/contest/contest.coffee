@@ -1,14 +1,8 @@
 mongoose = require('../mongoose')
-entry = require('./entry')
+category = require('./category')
 
 contestSchema = new mongoose.Schema
   name: String
-  entries: [entry.Schema]
-  voted: [String]
-
-contestSchema.methods.voted_on_by = (user) ->
-  for email in this.voted
-    return true if email is user.email
-  return false
+  categories: [category.Schema]
 
 Contest = module.exports = mongoose.model('Contest', contestSchema)

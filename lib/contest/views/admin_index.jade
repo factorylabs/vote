@@ -9,12 +9,12 @@ block content
       thead
         tr
           th Contest
-          th Entries
+          th Categories
       tbody
         for contest in contests
           tr
             td: a(href="/admin/contests/#{contest.id}")= contest.name
-            td= contest.entries.length
+            td= contest.categories.length
 
   hr
 
