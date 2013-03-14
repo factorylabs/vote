@@ -9,5 +9,6 @@ app.use(require('connect-assets')())
 app.use(require('./lib/auth').Router)
 app.use(require('./lib/contest').Router)
 
-app.listen 8080, ->
-  console.log 'Running on port 8080.'
+theport = process.env.PORT or 8080
+app.listen theport, ->
+  console.log "Running on port #{theport}."
