@@ -12,8 +12,8 @@ passport.deserializeUser (id, done) ->
     done(err, user)
 
 # Use the GoogleStrategy within Passport.
-domain = process.env.DOMAIN or 'localhost:8080/'
-domain = "http://#{domain}"
+domain = process.env.DOMAIN or 'localhost:8080'
+domain = "http://#{domain}/"
 google_strategy_options =
   returnURL: "#{domain}auth/google/return"
   realm: domain
