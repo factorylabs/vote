@@ -12,9 +12,11 @@ passport.deserializeUser (id, done) ->
     done(err, user)
 
 # Use the GoogleStrategy within Passport.
+domain = process.env.DOMAIN or 'localhost:8080/'
+domain = "http://#{domain}"
 google_strategy_options =
-  returnURL: 'http://localhost:8080/auth/google/return',
-  realm: 'http://localhost:8080/'
+  returnURL: "#{domain}auth/google/return"
+  realm: domain
 passport.use new GoogleStrategy google_strategy_options, (identifier, profile, done) ->
   user_email = profile.emails[0].value
 
