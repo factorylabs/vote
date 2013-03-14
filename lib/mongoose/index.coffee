@@ -5,4 +5,4 @@ mongoose.connect uristring, (err, res) ->
   if err
     console.log('ERROR connecting to: ' + uristring + '. ' + err)
   else
-    console.log('Succeeded connected to: ' + uristring)
+    console.log('Successful connection to: ' + uristring)
