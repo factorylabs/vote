@@ -11,7 +11,7 @@ app.get '/', (req, res) ->
   res.redirect('/contests')
 
 app.get '/contests', (req, res) ->
-  Contest.find {}, (err, contests) ->
+  Contest.find {open: true}, (err, contests) ->
     res.render 'index',
       contests: contests
       user: req.user
