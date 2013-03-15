@@ -7,7 +7,6 @@ userSchema = mongoose.Schema
   admin: {type: Boolean, default: false}
 
 userSchema.methods.is_admin = ->
-  console.log this.admin
   return this.admin
 
 User = module.exports.Model = mongoose.model('User', userSchema)

@@ -1,0 +1,160 @@
+/* Body, font, a styles */
+body { padding: 70px 0 0; }
+
+@media (max-width: 980px) {
+  body { padding-top: 0; }
+}
+
+@font-face{
+  font-family:"DIN Next W01 Bold";
+  src:url("/fonts/b32ab78b-6c51-4bd3-bc37-4edcec0331f8.eot?#iefix");
+  src:url("/fonts/b32ab78b-6c51-4bd3-bc37-4edcec0331f8.eot?#iefix") format("eot"),url("/fonts/9949035f-6226-4080-a14a-bf7d94ffb1e1.woff") format("woff"),url("/fonts/6241bd09-15c2-485e-9796-9db8d0aa6974.ttf") format("truetype"),url("/fonts/af94da3e-4232-416a-b6bc-f39f85dd5db6.svg#af94da3e-4232-416a-b6bc-f39f85dd5db6") format("svg");
+}
+
+@font-face{
+  font-family:"DIN Next W01 Regular";
+  src:url("/fonts/da088ecc-a53c-4831-a95b-6fd81b5b338a.eot?#iefix");
+  src:url("/fonts/da088ecc-a53c-4831-a95b-6fd81b5b338a.eot?#iefix") format("eot"),url("/fonts/c5a7f89e-15b6-49a9-8259-5ea665e72191.woff") format("woff"),url("/fonts/868c94b5-ca49-46b7-b62b-297f8d861125.ttf") format("truetype"),url("/fonts/e3145f65-29b5-4f7f-8c6e-2dc135021b6a.svg#e3145f65-29b5-4f7f-8c6e-2dc135021b6a") format("svg");
+}
+
+body a {
+  -webkit-transition: color .15s ease-in-out, background-color .15s ease-in-out;
+  -moz-transition: color .15s ease-in-out, background-color .15s ease-in-out;
+  -o-transition: color .15s ease-in-out, background-color .15s ease-in-out;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out;
+}
+
+/* Toolbar specific styles */
+
+.factory.navbar {
+  border-top: 2px solid #f0612a;
+}
+
+.factory.navbar a {
+  font-family:"DIN Next W01 Regular";
+}
+
+.factory.navbar .navbar-inner {
+  background: #fff;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.factory.navbar .container {
+  /* full width hotness */
+  margin: auto 20px;
+  width: auto;
+}
+
+.factory.navbar .nav > li > a.logo {
+  background: url('/img/logo.png') 0 15px no-repeat;
+  background-size: 106px 17px;
+  color: #fa5700;
+  font-size: 16px;
+  margin: 0;
+  padding-left: 115px;
+}
+
+.factory.navbar .nav > li > a.logo .caret {
+  margin-top: 3px;
+  border-top-color: #aaa;
+}
+
+.factory.navbar .nav > li > .dropdown-menu:before {
+  display: none;
+  left: 42px;
+}
+
+.factory.navbar .nav > li > ul.dropdown-menu {
+  background: #FFF;
+  border-top: 2px solid #f0612a;
+  border-bottom: 2px solid #f0612a;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+.factory.navbar .nav > li > ul.dropdown-menu::after {
+  border-bottom: 6px solid #f0612a;
+  left: 43px;
+  right: auto;
+}
+.factory.navbar .nav > li > ul.dropdown-menu li.divider {
+  border-color: #e3e3e3;
+}
+.factory.navbar .nav > li > ul.dropdown-menu li a {
+  color: #777777;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+.factory.navbar .nav > li > ul.dropdown-menu li a:hover {
+  background: #e3e3e3;
+  color: #f0612a;
+}
+
+.factory .btn-nav-collapse {
+  visibility: hidden;
+  position: absolute;
+  top: 20px; right: 20px;
+}
+
+.factory.navbar .nav > li > a {
+  color: #777;
+  padding: 17px 10px 12px;
+  text-shadow: none;
+  text-transform: uppercase;
+}
+.factory.navbar .nav > li > a:hover {
+  color: #f0612a;
+}
+.factory.navbar .brand:hover, .factory.navbar .nav > li.active > a {
+  background-color: #eee;
+  color: #666;
+  text-decoration: none;
+}
+
+.factory.navbar .nav li.dropdown.open > .dropdown-toggle {
+  background-color: #FFF;
+}
+.factory.navbar .nav ul.dropdown-menu {
+  min-width: 110px;
+  top: 40px;
+}
+.factory.navbar .dropdown-menu li.divider {
+  background-color: #eee;
+  border-color: #ddd;
+  width:100%;
+}
+.factory.navbar .dropdown-menu li a {
+  padding: 5px 10px 0px 10px;
+  color: #999;
+  text-shadow: none;
+}
+.factory.navbar .dropdown-menu li a:hover {
+  color: #f0612a;
+  background: #eee;
+  background-image: none;
+}
+
+.factory.navbar .nav.pull-right li.dropdown > a.dropdown-toggle .caret {
+  border-top-color: #f0612a;
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+
+ul.nav.pull-right > li > a:after {
+  content: "\.";
+  color: #f0612a;
+}
+
+ul.nav.pull-right > li > a.dropdown-toggle:after {
+  position: relative;
+  left: -12px;
+}
+
+@media (max-width: 980px) {
+  .factory.navbar { border-top: 2px solid #f0612a; }
+  .factory.navbar .btn-nav-collapse { visibility: visible; }
+  .factory.navbar .nav { margin: 0; }
+}
