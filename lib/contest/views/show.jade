@@ -1,13 +1,13 @@
 extend ../../views/layout
 
 block content
-  h3.factoryize.upcase= contest.name
+  h2.factoryize.upcase= contest.name
   if contest.categories.length == 0
     p: small No categories
   else
     for category in contest.categories
       .category-container
-        h4.factoryize= category.name
+        h3.factoryize= category.name
         if category.entries.length == 0
           p: small No entries
         else
