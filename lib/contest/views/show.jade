@@ -20,8 +20,11 @@ block content
                   li.entry.span4
                     .thumbnail
                       img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
+                      span.badge.pull-right= entry.votes
                 else
-                  li.entry.span2: .thumbnail: h4= entry.name
+                  li.entry.span2: .thumbnail
+                    h4= entry.name
+                    span.badge.pull-right= entry.votes
           else
             ul.thumbnails
               for entry in category.entries

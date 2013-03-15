@@ -7,8 +7,9 @@ app.use(express.bodyParser())
 app.set('views', "#{__dirname}/views")
 app.set('view engine', 'jade')
 
-app.get '/', (req, res) ->
-  res.redirect('/contests')
+app.get '/', (req, res) -> res.redirect('/contests')
+
+app.get '/login', (req, res) -> res.render('login', user: req.user)
 
 app.get '/contests', (req, res) ->
   Contest.find {open: true}, (err, contests) ->

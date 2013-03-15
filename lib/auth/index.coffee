@@ -51,7 +51,7 @@ app.use(passport.session())
 #   the request will proceed.
 ensureAuthenticated = module.exports.ensureAuthenticated = (req, res, next) ->
   return next() if (req.isAuthenticated())
-  res.redirect('/')
+  res.redirect('/login')
 
 ensureAdmin = module.exports.ensureAdmin = (req, res, next) ->
   return next() if req.user?.admin
