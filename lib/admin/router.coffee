@@ -32,7 +32,6 @@ app.get '/admin/contests/:id', check_admin, (req, res) ->
       user: req.user
 
 app.post '/admin/contests/:id', check_admin, (req, res) ->
-  console.log req.params.id, req.body
   contest_update = req.body
   contest_update.open = false if req.body.open && req.body.open == 'false'
 

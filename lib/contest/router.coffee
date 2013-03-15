@@ -37,21 +37,40 @@ app.get '/contests/:id/leaderboard', (req, res) ->
 
 # User vote
 app.post '/vote', auth.ensureAuthenticated, (req, res) ->
-  Contest.findById req.body.contest, (err, contest) ->
-    category = contest.categories.id(req.body.category)
+  votes = req.body.votes
+  contest_id = votes[0].contest # assumes all votes are for same contest
 
-    if category.voted_on_by(req.user)
-      res.send(418)
-    else
-      entry = category.entries.id(req.body.entry)
+  Contest.findById contest_id, (err, contest) ->
+    errors = []
+    success = 0
 
-      if entry?
-        entry.votes++
+    for vote in votes
+      do (vote) ->
+        category = contest.categories.id(vote.category)
 
-        unless req.user.kiosk
-          category.voted.push(req.user.email)
+        if category.voted_on_by(req.user)
+          errors.push
+            message: 'User has already voted on category.'
+            vote: vote
 
-        contest.save (err) ->
-          res.send(200)
-      else
-        res.send(404)
+          if success + errors.length == votes.length
+            res.json errors: errors
+        else
+          entry = category.entries.id(vote.entry)
+
+          if entry?
+            entry.votes++
+
+            unless req.user.kiosk
+              category.voted.push(req.user.email)
+
+            contest.save (err) ->
+              success++
+              if success == votes.length
+                res.send(200)
+          else
+            errors.push
+              message: 'Can\'t find entry'
+              vote: vote
+            if success + errors.length == votes.length
+              res.json errors: errors

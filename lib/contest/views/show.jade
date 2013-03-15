@@ -23,20 +23,18 @@ block content
                 else
                   li.entry.span2: .thumbnail: h4= entry.name
           else
-            h5.category-message Click to vote:
             ul.thumbnails
               for entry in category.entries
                 if entry.slug
-                  li.entry.span4
-                    a.vote.thumbnail(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                  li.entry.span4(data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                    a.vote.thumbnail(href="#")
                       img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
                 else
-                  li.entry.span2
-                    a.vote.thumbnail(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                  li.entry.span2(data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                    a.vote.thumbnail(href="#")
                       h4= entry.name
 
-    if user.kiosk
-      .row: .span12
-        a.btn.btn-factory-orange.btn-huge(href='') Done
-        br
-        br
+    .row: .span12
+      a.btn.btn-factory-orange.btn-huge.done(href='#') Done
+      br
+      br
