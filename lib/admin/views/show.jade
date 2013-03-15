@@ -1,7 +1,14 @@
 extend ../../views/layout
 
+block footer
+  != js('admin')
+
 block content
   h2.factoryize.upcase= contest.name
+  p
+    | Open:&nbsp;
+    input.open-contest(type='checkbox', checked=contest.open ? 'checked' : undefined, data-contest=contest.id)
+
   if contest.categories.length == 0
     p: small No categories
   else

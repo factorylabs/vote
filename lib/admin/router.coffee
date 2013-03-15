@@ -31,6 +31,14 @@ app.get '/admin/contests/:id', check_admin, (req, res) ->
       contest: contest
       user: req.user
 
+app.post '/admin/contests/:id', check_admin, (req, res) ->
+  console.log req.params.id, req.body
+  contest_update = req.body
+  contest_update.open = false if req.body.open && req.body.open == 'false'
+
+  Contest.findByIdAndUpdate req.params.id, contest_update, (err, contest) ->
+    res.json contest
+
 # Admin can add Category to Contest
 app.post '/admin/contests/:contest_id/categories', check_admin, (req, res) ->
   Contest.findById req.params.contest_id, (err, contest) ->

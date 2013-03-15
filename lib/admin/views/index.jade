@@ -5,16 +5,20 @@ block content
   if contests.length == 0
     p: small No contests
   else
-    table.table
+    table.table.table-striped
       thead
         tr
           th Contest
+          th Status
           th Categories
+          th Entries
       tbody
         for contest in contests
           tr
             td: a(href="/admin/contests/#{contest.id}")= contest.name
+            td= contest.open ? 'Open' : 'Closed'
             td= contest.categories.length
+            td ?
 
   hr
 
