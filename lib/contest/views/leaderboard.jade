@@ -1,0 +1,24 @@
+extend ../../views/layout
+
+block head
+  meta(http-equiv="refresh", content="5;URL=")
+
+block content
+  h3.factoryize.upcase= contest.name
+  if contest.categories.length == 0
+    p: small No categories
+  else
+    for category in contest.categories
+      h4.factoryize= category.name
+      if category.entries.length == 0
+        p: small No entries in this category
+      else
+        ul.thumbnails
+          for entry in category.entries
+            li.span2
+              div.thumbnail
+                if entry.slug
+                  img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+                h4
+                  = entry.name
+                  span.badge.pull-right= entry.votes
