@@ -13,7 +13,8 @@ block content
         ul.thumbnails
           for entry in category.entries
             li.span2: div.thumbnail
-              img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+              if entry.slug
+                img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
               h5
                 = entry.name
                 span.badge.pull-right= entry.votes

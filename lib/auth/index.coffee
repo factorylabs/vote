@@ -54,7 +54,7 @@ ensureAuthenticated = module.exports.ensureAuthenticated = (req, res, next) ->
   res.redirect('/')
 
 ensureAdmin = module.exports.ensureAdmin = (req, res, next) ->
-  return next() if true
+  return next() if req.user?.admin
   res.redirect('/')
 
 # GET /auth/google

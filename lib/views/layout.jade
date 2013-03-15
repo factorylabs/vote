@@ -13,7 +13,8 @@ html
           block content
         .span2
           ul.nav.nav-tabs.nav-stacked
-            li: a(href='/admin') Admin
+            if user && user.admin
+              li: a(href='/admin') Admin
             li: a(href='/contests') All Contests
             if user
               li: a(href='/logout') Logout
