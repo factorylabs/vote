@@ -27,6 +27,13 @@ app.get '/contests/:id/leaderboard', (req, res) ->
     res.render 'leaderboard'
       contest: contest
       user: req.user
+      predicatBy: (prop) ->
+        return (a,b) ->
+          if( a[prop] < b[prop])
+            return 1
+          else if( a[prop] > b[prop] )
+            return -1
+          return 0
 
 # User vote
 app.post '/vote', auth.ensureAuthenticated, (req, res) ->
