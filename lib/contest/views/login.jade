@@ -1,4 +1,10 @@
 extends ../../views/layout
 
 block content
-  a.factoryize(href='/auth/google') Please login with your Factory Google account.
+  .row
+    .span3.offset3
+      p
+        a.btn(href='/auth/google')
+          i.icon-user
+          | &nbsp;Sign in
+      p with your Factory Google account.
