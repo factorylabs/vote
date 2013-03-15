@@ -33,3 +33,9 @@ block content
                   li.span2
                     a.thumbnail.vote(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
                       h4= entry.name
+
+    if user.kiosk
+      .row
+        .span2: a.btn.btn-factory-orange.btn-huge(href='') Done
+        br
+        br
