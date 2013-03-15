@@ -17,22 +17,22 @@ block content
             ul.thumbnails
               for entry in category.entries
                 if entry.slug
-                  li.span4.entry
+                  li.entry.span4
                     .thumbnail
                       img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
                 else
-                  li.span2.entry: .thumbnail: h4= entry.name
+                  li.entry.span2: .thumbnail: h4= entry.name
           else
             h5.category-message Click to vote:
             ul.thumbnails
               for entry in category.entries
                 if entry.slug
-                  li.span4.entry
-                    a.thumbnail.vote(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                  li.entry.span4
+                    a.vote.thumbnail(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
                       img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
                 else
-                  li.span2.entry
-                    a.thumbnail.vote(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                  li.entry.span2
+                    a.vote.thumbnail(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
                       h4= entry.name
 
     if user.kiosk

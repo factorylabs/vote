@@ -1,30 +1,30 @@
 extend ../../views/layout
 
 block content
-  h3= contest.name
+  h2.factoryize.upcase= contest.name
   if contest.categories.length == 0
     p: small No categories
   else
     for category in contest.categories
-      h4= category.name
-      if category.entries.length == 0
-        p: small No entries in this category
-      else
-        ul.thumbnails
-          for entry in category.entries
-            li.span2(rel='popover', data-content='<img width=306 height=306 src="http://instagr.am/p/#{entry.slug}/media/?size=m" />')
-              div.thumbnail
-                if entry.slug
-                  img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
-                h5
-                  = entry.name
-                  span.badge.pull-right= entry.votes
+      .category-container
+        h3.factoryize.bold.orange= category.name
+        if category.entries.length == 0
+          p: small No entries in this category
+        else
+          ul.thumbnails
+            for entry in category.entries
+              li.entry.span2(rel='popover', data-content='<img width=306 height=306 src="http://instagr.am/p/#{entry.slug}/media/?size=m" />')
+                div.thumbnail
+                  if entry.slug
+                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+                  h4
+                    = entry.name
+                    span.badge.pull-right= entry.votes
 
-      form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries", method='POST')
-        input.input-large(type='text', name='name', placeholder='Entry Name')
-        input.input-small(type='text', name='slug', placeholder='Photo Slug')
-        input.btn(type='submit', value='Add')
-      hr
+        form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries", method='POST')
+          input.input-large(type='text', name='name', placeholder='Entry Name')
+          input.input-small(type='text', name='slug', placeholder='Photo Slug')
+          input.btn(type='submit', value='Add')
 
   h5 Add Category to Contest
   form.form-inline(action="/admin/contests/#{contest.id}/categories", method='POST')

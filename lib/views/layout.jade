@@ -37,8 +37,8 @@ html
           ul.nav.pull-right
             if user && user.admin
               li: a(href='/admin') Admin
-            li: a(href='/contests') All Contests
             if user
+              li: a(href='/contests') Active Contests
               li.dropdown
                 a.dropdown-toggle(href="#", data-toggle="dropdown")
                   = user.name

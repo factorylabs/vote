@@ -5,7 +5,7 @@ block head
   != css('remove-toolbar')
 
 block content
-  //- h2.factoryize.upcase= contest.name
+  h2.factoryize.upcase= contest.name
   if contest.categories.length == 0
     p: small No categories
   else
@@ -16,7 +16,7 @@ block content
           p: small No entries in this category
         else
           ul.thumbnails
-            for entry in category.entries.sort(predicatBy('votes'))
+            for entry in category.entries.sort(sort_desc('votes'))
               li.entry.span2
                 div.thumbnail
                   if entry.slug
