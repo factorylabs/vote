@@ -12,6 +12,8 @@ app.get '/', (req, res) ->
 
 app.get '/contests', (req, res) ->
   Contest.find {open: true}, (err, contests) ->
+    if contests.length is 1
+      res.redirect("/contests/#{contests[0].id}")
     res.render 'index',
       contests: contests
       user: req.user
