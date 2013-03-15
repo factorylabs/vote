@@ -4,6 +4,7 @@ userSchema = mongoose.Schema
   name: String
   email: String
   openId: String
+  kiosk: {type: Boolean, default: false}
   admin: {type: Boolean, default: false}
 
 userSchema.methods.is_admin = ->

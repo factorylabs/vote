@@ -6,28 +6,30 @@ block content
     p: small No categories
   else
     for category in contest.categories
-      h4.factoryize= category.name
-      if category.entries.length == 0
-        p: small No entries
-      else
-        if category.voted_on_by(user)
-          h6 You have already voted.
-          ul.thumbnails
-            for entry in category.entries
-              if entry.slug
-                li.span4
-                  .thumbnail
-                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
-              else
-                li.span2: .thumbnail: h4= entry.name
+      .category-container
+        h4.factoryize= category.name
+        if category.entries.length == 0
+          p: small No entries
         else
-          h5 Click to vote:
-          ul.thumbnails
-            for entry in category.entries
-              if entry.slug
-                li.span4
-                  a.thumbnail(href="/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}/vote")
-                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
-              else
-                li.span2: a.thumbnail(href="/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}/vote")
-                   h4= entry.name
+          if category.voted_on_by(user)
+            h6.category-message You have already voted.
+            ul.thumbnails
+              for entry in category.entries
+                if entry.slug
+                  li.span4
+                    .thumbnail
+                      img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
+                else
+                  li.span2: .thumbnail: h4= entry.name
+          else
+            h5.category-message Click to vote:
+            ul.thumbnails
+              for entry in category.entries
+                if entry.slug
+                  li.span4
+                    a.thumbnail.vote(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                      img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
+                else
+                  li.span2
+                    a.thumbnail.vote(href="#", data-contest=contest.id, data-category=category.id, data-entry=entry.id)
+                      h4= entry.name
