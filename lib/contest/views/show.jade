@@ -15,9 +15,9 @@ block content
           ul.thumbnails
             for entry in category.entries
               if entry.slug
-                li.span2(rel='popover', data-content='<img width=306 height=306 src="http://instagr.am/p/#{entry.slug}/media/?size=m" />')
+                li.span4
                   .thumbnail
-                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
               else
                 li.span2: .thumbnail: h4= entry.name
         else
@@ -25,9 +25,9 @@ block content
           ul.thumbnails
             for entry in category.entries
               if entry.slug
-                li.span2(rel='popover', data-content='<img width=306 height=306 src="http://instagr.am/p/#{entry.slug}/media/?size=m" />')
+                li.span4
                   a.thumbnail(href="/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}/vote")
-                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
               else
                 li.span2: a.thumbnail(href="/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}/vote")
                    h4= entry.name
