@@ -1,10 +1,7 @@
 assert = require('assert')
+Contest = require('../lib/contest/contest')
 User = require('../lib/user').Model
 
-describe 'Array', ->
-  describe '#indexOf()', ->
-    it 'should return -1 when the value is not present', ->
-      assert.equal(-1, [1,2,3].indexOf(5))
 describe 'Users', ->
   describe 'new', ->
     it 'doesn\'t allow non FDL emails', ->
@@ -27,4 +24,45 @@ describe 'Users', ->
     it 'should verify admin status', ->
       assert.equal(normal_user.is_admin(), false)
       assert.equal(admin_user.is_admin(), true)
+
+describe 'Contest', ->
+  describe 'voting', ->
+    user = new User
+      name: 'Joe Blow'
+      email: 'joe.blow@factorylabs.com'
+    contest = new Contest
+      name: 'contest 1'
+      open: true
+    category = name: 'category 1'
+    entry = name: 'entry 1'
+
+    contest.categories.push(category)
+    contest.categories[0].entries.push(entry)
+
+    it 'should let users vote', ->
+      user.vote contest.categories[0].entries[0], (err) ->
+        assert.equal(category.voted_on_by(user), true)
+
+    it 'should not allow users to vote twice on a category', ->
+      user.vote contest.categories[0].entries[0], (err) ->
+        assert.equal(err.message, 'User already voted on category.')
+
     it 'should allow users to vote on many entries at once', ->
+      category_2 =
+        name: 'category 2'
+        entries: [
+          {name: 'entry 2.1'}
+          {name: 'entry 2.2'}
+        ]
+
+      contest.categories.push(category_2)
+
+      votes = []
+      for entry in category_2.entries
+        votes.push
+          contest: contest._id
+          category: category_2._id
+          entry: entry._id
+
+      user.submit_votes votes, (err) ->
+        assert.equal(err, 'yup')

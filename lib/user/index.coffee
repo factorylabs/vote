@@ -1,4 +1,5 @@
 mongoose = require('../mongoose')
+Contest = require('../contest/contest')
 
 userSchema = mongoose.Schema
   name: String
