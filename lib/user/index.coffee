@@ -28,28 +28,28 @@ userSchema.methods.vote = (entry, callback) ->
         category.voted.push(user.email)
 
       contest.save (err) ->
-        callback(err)
+        callback(err, entry)
 
 userSchema.methods.submit_votes = (votes, callback) ->
   user = @
-  success = 0
+  success = []
   errors = []
 
   for vote in votes
     # votes are simple objects with contest, category, and entry ids
     do (vote) ->
-      console.log vote
       Contest.findById vote.contest, (err, contest) ->
         category = contest.categories.id(vote.category)
         entry = category.entries.id(vote.entry)
 
-        user.vote entry, (err) ->
-          errors.push err if err
-          success++
+        user.vote entry, (err, new_entry) ->
+          if err
+            errors.push err
+          else
+            success.push new_entry
 
-          if success + errors.length == votes.length
-            console.log 'done voting'
-            callback(errors)
+          if (success.length + errors.length) == votes.length
+            callback(errors, success)
 
 User = module.exports.Model = mongoose.model('User', userSchema)
 
