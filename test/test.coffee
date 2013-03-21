@@ -27,3 +27,4 @@ describe 'Users', ->
     it 'should verify admin status', ->
       assert.equal(normal_user.is_admin(), false)
       assert.equal(admin_user.is_admin(), true)
+    it 'should allow users to vote on many entries at once', ->
