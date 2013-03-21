@@ -38,6 +38,7 @@ userSchema.methods.submit_votes = (votes, callback) ->
   for vote in votes
     # votes are simple objects with contest, category, and entry ids
     do (vote) ->
+      console.log vote
       Contest.findById vote.contest, (err, contest) ->
         category = contest.categories.id(vote.category)
         entry = category.entries.id(vote.entry)
@@ -47,6 +48,7 @@ userSchema.methods.submit_votes = (votes, callback) ->
           success++
 
           if success + errors.length == votes.length
+            console.log 'done voting'
             callback(errors)
 
 User = module.exports.Model = mongoose.model('User', userSchema)

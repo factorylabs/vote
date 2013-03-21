@@ -33,19 +33,23 @@ describe 'Contest', ->
     contest = new Contest
       name: 'contest 1'
       open: true
-    category = name: 'category 1'
+    category =
+      name: 'category 1'
+      entries: []
     entry = name: 'entry 1'
 
+    category.entries.push(entry)
     contest.categories.push(category)
-    contest.categories[0].entries.push(entry)
 
-    it 'should let users vote', ->
+    it 'should let users vote', (done) ->
       user.vote contest.categories[0].entries[0], (err) ->
         assert.equal(category.voted_on_by(user), true)
+        done()
 
-    it 'should not allow users to vote twice on a category', ->
+    it 'should not allow users to vote twice on a category', (done) ->
       user.vote contest.categories[0].entries[0], (err) ->
         assert.equal(err.message, 'User already voted on category.')
+        done()
 
     it 'should allow users to vote on many entries at once', ->
       category_2 =
@@ -56,6 +60,8 @@ describe 'Contest', ->
         ]
 
       contest.categories.push(category_2)
+
+      assert.equal(contest.categories.length, 2)
 
       votes = []
       for entry in category_2.entries
