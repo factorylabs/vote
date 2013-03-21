@@ -39,8 +39,9 @@ describe 'Contest', ->
         {name: 'category 2', entries: [{name: 'entry 2.1'}, {name: 'entry 2.2'}]}
       ]
 
-    after ->
-      contest.remove()
+    after (done) ->
+      contest.remove ->
+        done()
 
     it 'should let users vote', (done) ->
       user.vote contest.categories[0].entries[0], (err) ->
@@ -53,14 +54,14 @@ describe 'Contest', ->
         assert.equal(err.message, 'User already voted on category.')
         done()
 
-    votes = []
-    for entry in contest.categories[1].entries
-      votes.push
-        contest: contest._id
-        category: contest.categories[1]._id
-        entry: entry._id
-
     it 'should allow users to vote on many entries at once', (done) ->
+      votes = []
+      for entry in contest.categories[1].entries
+        votes.push
+          contest: contest._id
+          category: contest.categories[1]._id
+          entry: entry._id
+
       user.submit_votes votes, (err, entries) ->
         assert.equal(err.length, 0)
         assert.equal(entries[0].votes, 1)
