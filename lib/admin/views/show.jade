@@ -13,20 +13,19 @@ block content
     p: small No categories
   else
     for category in contest.categories
-      .category-container
+      .admin.category-container
         h3.factoryize.bold.orange= category.name
         if category.entries.length == 0
           p: small No entries in this category
         else
-          ul.thumbnails
+          .entries.clearfix
             for entry in category.entries
-              li.entry.span2(rel='popover', data-content='<img width=306 height=306 src="http://instagr.am/p/#{entry.slug}/media/?size=m" />')
-                div.thumbnail
-                  if entry.slug
-                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
-                  h4
-                    = entry.name
-                    span.badge.pull-right= entry.votes
+              .entry
+                if entry.slug
+                  img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+                if entry.name
+                  h4= entry.name
+                span.badge.pull-right= entry.votes
 
         form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries", method='POST')
           input.input-large(type='text', name='name', placeholder='Entry Name')

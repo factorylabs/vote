@@ -5,7 +5,7 @@ $ ->
 
   $('.vote').click (e) ->
     e.preventDefault()
-    $(@).parent('li.entry').addClass('selected').removeClass('dim').siblings('li').addClass('dim').removeClass('selected')
+    $(@).addClass('selected').removeClass('dim').siblings('.vote').addClass('dim').removeClass('selected')
 
   $('.done').one 'click', (e) ->
     e.preventDefault()

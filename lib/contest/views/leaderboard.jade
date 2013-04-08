@@ -15,12 +15,11 @@ block content
         if category.entries.length == 0
           p: small No entries in this category
         else
-          ul.thumbnails
+          .entries.clearfix
             for entry in category.entries.sort(sort_desc('votes'))
-              li.entry.span2
-                div.thumbnail
-                  if entry.slug
-                    img(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
-                  h4
-                    = entry.name
-                    span.badge.pull-right= entry.votes
+              .entry
+                if entry.slug
+                  img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
+                if entry.name
+                  h4= entry.name
+                span.badge.pull-right= entry.votes

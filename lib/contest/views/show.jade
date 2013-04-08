@@ -14,28 +14,15 @@ block content
         else
           if category.voted_on_by(user)
             .alert: strong You have already voted.
-            ul.thumbnails
-              for entry in category.entries
+          .entries.clearfix
+            for entry in category.entries
+              .entry.vote(data-contest=contest.id, data-category=category.id, data-entry=entry.id)
                 if entry.slug
-                  li.entry.span4
-                    .thumbnail
-                      img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
-                      span.badge.pull-right= entry.votes
-                else
-                  li.entry.span2: .thumbnail
-                    h4= entry.name
-                    span.badge.pull-right= entry.votes
-          else
-            ul.thumbnails
-              for entry in category.entries
-                if entry.slug
-                  li.entry.span4(data-contest=contest.id, data-category=category.id, data-entry=entry.id)
-                    a.vote.thumbnail(href="#")
-                      img(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
-                else
-                  li.entry.span2(data-contest=contest.id, data-category=category.id, data-entry=entry.id)
-                    a.vote.thumbnail(href="#")
-                      h4= entry.name
+                  img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
+                if entry.name
+                  h4= entry.name
+                if category.voted_on_by(user)
+                  span.badge.pull-right= entry.votes
 
     if !contest.categories[0].voted_on_by(user)
       .row: .span12

@@ -1,5 +1,5 @@
 mongoose = module.exports = require('mongoose')
-uristring = process.env.MONGOLAB_URI or 'mongodb://localhost/instagram-voting'
+uristring = process.env.MONGOLAB_URI or 'mongodb://localhost/vote'
 
 mongoose.connect uristring, (err, res) ->
   if err
