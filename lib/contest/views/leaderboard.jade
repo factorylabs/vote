@@ -20,6 +20,8 @@ block content
               .entry
                 if entry.slug
                   img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
+                else if entry.image_url
+                  img.img-polaroid(src=entry.image_url)
                 if entry.name
                   h4= entry.name
                 span.badge.pull-right= entry.votes

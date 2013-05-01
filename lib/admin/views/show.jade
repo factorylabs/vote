@@ -23,16 +23,23 @@ block content
               .entry
                 if entry.slug
                   img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
+                else if entry.image_url
+                  img.img-polaroid(src=entry.image_url)
                 if entry.name
                   h4= entry.name
                 span.badge.pull-right= entry.votes
 
         form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries", method='POST')
           input.input-large(type='text', name='name', placeholder='Entry Name')
-          input.input-small(type='text', name='slug', placeholder='Photo Slug')
+          | &nbsp;
+          input(type='text', name='slug', placeholder='Instagram Slug')
+          = ' or '
+          input(type='text', name='image_url', placeholder='Photo URL')
+          | &nbsp;
           input.btn(type='submit', value='Add')
 
   h5 Add Category to Contest
   form.form-inline(action="/admin/contests/#{contest.id}/categories", method='POST')
     input.input-large(type='text', name='name', placeholder='Category Name')
+    | &nbsp;
     input.btn(type='submit')

@@ -19,6 +19,8 @@ block content
               .entry.vote(data-contest=contest.id, data-category=category.id, data-entry=entry.id)
                 if entry.slug
                   img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=l")
+                else if entry.image_url
+                  img.img-polaroid(src=entry.image_url)
                 if entry.name
                   h4= entry.name
                 if category.voted_on_by(user)
