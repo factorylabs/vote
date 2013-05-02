@@ -8,6 +8,8 @@ block content
   p
     | Open:&nbsp;
     input.open-contest(type='checkbox', checked=contest.open ? 'checked' : undefined, data-contest=contest.id)
+    | Show Results&nbsp;
+    input.show-results(type='checkbox', checked=contest.show_results ? 'checked' : undefined, data-contest=contest.id)
 
   if contest.categories.length == 0
     p: small No categories

@@ -33,7 +33,11 @@ app.get '/admin/contests/:id', check_admin, (req, res) ->
 
 app.post '/admin/contests/:id', check_admin, (req, res) ->
   contest_update = req.body
-  contest_update.open = false if req.body.open? && req.body.open == 'false'
+  if req.body.open? && req.body.open == 'false'
+    contest_update.open = false
+
+  if req.body.show_results? && req.body.show_results == 'false'
+    contest_update.show_results = false
 
   Contest.findByIdAndUpdate req.params.id, contest_update, (err, contest) ->
     res.json contest
