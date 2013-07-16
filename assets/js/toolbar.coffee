@@ -47,7 +47,7 @@ hoverdrop_menu =
       if link.name is '-'
         links_html += '<li class="divider"></li>'
       else
-        links_html += "<li><a href=\"#{link.url}\">#{link.name}</a></li>"
+        links_html += "<li><a href=\"#{link.url}\" target=\"_blank\">#{link.name}</a></li>"
 
     $('#main-nav').html(links_html)
 
