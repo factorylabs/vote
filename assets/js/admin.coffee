@@ -1,5 +1,5 @@
 $ ->
-  $('.open-contest').change ->
+  $('#open-contest').change ->
     $checkbox = $(@)
     contest_id = $checkbox.data('contest')
     contest =
@@ -8,7 +8,7 @@ $ ->
     $.post "/admin/contests/#{contest_id}", contest, (response) ->
       console.log response
 
-  $('.show-results').change ->
+  $('#show-results').change ->
     $checkbox = $(@)
     contest_id = $checkbox.data('contest')
     contest =
