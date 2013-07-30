@@ -19,7 +19,7 @@ block content
       tbody
         for contest in contests
           tr
-            td: a(href="/admin/contests/#{contest.id}")= contest.name
+            td: strong: a(href="/admin/contests/#{contest.id}")= contest.name
             td= contest.open ? 'Open' : 'Closed'
             td= contest.categories.length
             td ?
@@ -33,4 +33,5 @@ block content
   h4 Create New Contest
   form.form-inline(action='/admin/contests', method='POST')
     input(type='text', name='name', placeholder='Name')
+    | &nbsp;
     input.btn(type='submit', value='Create')

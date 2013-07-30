@@ -54,6 +54,12 @@ app.post '/admin/contests/:contest_id/categories', check_admin, (req, res) ->
     contest.save (err) ->
       res.redirect("/admin/contests/#{contest.id}")
 
+app.delete '/admin/contests/:contest_id/categories/:category_id/', check_admin, (req, res) ->
+  Contest.findById req.params.contest_id, (err, contest) ->
+    contest.categories.id(req.params.category_id).remove()
+    contest.save (err) ->
+      res.redirect("/admin/contests/#{contest.id}")
+
 # Admin can add Entry to Category
 app.post '/admin/contests/:contest_id/categories/:category_id/entries', check_admin, (req, res) ->
   Contest.findById req.params.contest_id, (err, contest) ->

@@ -13,10 +13,17 @@ block content
 
   if contest.categories.length == 0
     p: small No categories
+
   else
     for category in contest.categories
       .admin.category-container
+
         h3.factoryize.bold.orange= category.name
+
+        form.delete-entity(method='post', action="/admin/contests/#{contest.id}/categories/#{category.id}/")
+          input(type='hidden', name='_method', value='delete')
+          input.btn(type='submit', value='Delete')
+
         if category.entries.length == 0
           p: small No entries in this category
         else
