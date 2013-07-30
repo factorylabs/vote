@@ -47,7 +47,7 @@ app.delete '/admin/contests/:id', check_admin, (req, res) ->
   Contest.remove(_id: req.params.id).exec()
   res.redirect('/admin/contests')
 
-# Admin can add Category to Contest
+# Admin can manage contest categories
 app.post '/admin/contests/:contest_id/categories', check_admin, (req, res) ->
   Contest.findById req.params.contest_id, (err, contest) ->
     contest.categories.push req.body
@@ -60,10 +60,16 @@ app.delete '/admin/contests/:contest_id/categories/:category_id/', check_admin, 
     contest.save (err) ->
       res.redirect("/admin/contests/#{contest.id}")
 
-# Admin can add Entry to Category
+# Admin can manage category entries
 app.post '/admin/contests/:contest_id/categories/:category_id/entries', check_admin, (req, res) ->
   Contest.findById req.params.contest_id, (err, contest) ->
     category = contest.categories.id(req.params.category_id)
     category.entries.push(req.body)
+    contest.save (err) ->
+      res.redirect("/admin/contests/#{contest.id}")
+
+app.delete '/admin/contests/:contest_id/categories/:category_id/entries/:entry_id', check_admin, (req, res) ->
+  Contest.findById req.params.contest_id, (err, contest) ->
+    contest.categories.id(req.params.category_id).entries.id(req.params.entry_id).remove()
     contest.save (err) ->
       res.redirect("/admin/contests/#{contest.id}")

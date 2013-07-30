@@ -30,6 +30,9 @@ block content
           .entries.clearfix
             for entry in category.entries
               .entry
+                form.delete-entity(method='post', action="/admin/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}")
+                  input(type='hidden', name='_method', value='delete')
+                  input.btn(type='submit', value='Delete')
                 if entry.slug
                   img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
                 else if entry.image_url
