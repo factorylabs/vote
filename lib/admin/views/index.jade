@@ -1,5 +1,8 @@
 extend ../../views/layout
 
+block footer
+  != js('admin')
+
 block content
   h3.factoryize Admin
   if contests.length == 0
@@ -21,9 +24,9 @@ block content
             td= contest.categories.length
             td ?
             td
-              form(method='post', action="/admin/contests/#{contest.id}/")
+              form.delete-entity(method='post', action="/admin/contests/#{contest.id}/")
                 input(type='hidden', name='_method', value='delete')
-                input(type='submit', class='btn', value='Delete')
+                input.btn(type='submit', value='Delete')
 
   hr
 

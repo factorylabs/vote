@@ -16,3 +16,6 @@ $ ->
 
     $.post "/admin/contests/#{contest_id}", contest, (response) ->
       console.log response
+
+  $('form.delete-entity').submit ->
+    return confirm('Are you sure?')
