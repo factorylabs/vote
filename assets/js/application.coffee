@@ -11,7 +11,8 @@ $ ->
       e.preventDefault()
 
       selected_entries = []
-      selected_entries.push $(entry).data() for entry in $('.entry.selected')
+      for entry in $('.entry.selected')
+        selected_entries.push($(entry).data())
 
       $.post '/vote', votes: selected_entries, (response) ->
         if response is 'OK'

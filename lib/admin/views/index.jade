@@ -12,6 +12,7 @@ block content
           th Status
           th Categories
           th Entries
+          th
       tbody
         for contest in contests
           tr
@@ -19,6 +20,10 @@ block content
             td= contest.open ? 'Open' : 'Closed'
             td= contest.categories.length
             td ?
+            td
+              form(method='post', action="/admin/contests/#{contest.id}/")
+                input(type='hidden', name='_method', value='delete')
+                input(type='submit', class='btn', value='Delete')
 
   hr
 

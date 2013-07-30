@@ -4,6 +4,7 @@ Contest = require('../contest/contest')
 
 app = module.exports = express()
 app.use(express.bodyParser())
+app.use(express.methodOverride())
 app.set('views', "#{__dirname}/views")
 app.set('view engine', 'jade')
 
@@ -40,7 +41,11 @@ app.post '/admin/contests/:id', check_admin, (req, res) ->
     contest_update.show_results = false
 
   Contest.findByIdAndUpdate req.params.id, contest_update, (err, contest) ->
-    res.json contest
+    res.json(contest)
+
+app.delete '/admin/contests/:id', check_admin, (req, res) ->
+  Contest.remove(_id: req.params.id).exec()
+  res.redirect('/admin/contests')
 
 # Admin can add Category to Contest
 app.post '/admin/contests/:contest_id/categories', check_admin, (req, res) ->
@@ -49,11 +54,10 @@ app.post '/admin/contests/:contest_id/categories', check_admin, (req, res) ->
     contest.save (err) ->
       res.redirect("/admin/contests/#{contest.id}")
 
-
 # Admin can add Entry to Category
 app.post '/admin/contests/:contest_id/categories/:category_id/entries', check_admin, (req, res) ->
   Contest.findById req.params.contest_id, (err, contest) ->
     category = contest.categories.id(req.params.category_id)
-    category.entries.push req.body
+    category.entries.push(req.body)
     contest.save (err) ->
       res.redirect("/admin/contests/#{contest.id}")
