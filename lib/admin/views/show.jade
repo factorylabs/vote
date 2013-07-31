@@ -18,16 +18,17 @@ block content
     for category in contest.categories
       .admin.category-container
 
-        h3.factoryize.bold.orange= category.name
+        .row: .span12
+          h3.factoryize.bold.orange.pull-left= category.name
 
-        form.delete-entity(method='post', action="/admin/contests/#{contest.id}/categories/#{category.id}/")
-          input(type='hidden', name='_method', value='delete')
-          input.btn(type='submit', value='Delete')
+          form.delete-entity.pull-right(method='post', action="/admin/contests/#{contest.id}/categories/#{category.id}/")
+            input(type='hidden', name='_method', value='delete')
+            input.btn.btn-danger(type='submit', value='Delete Category')
 
         if category.entries.length == 0
           p: small No entries in this category
         else
-          .entries.clearfix
+          .row: .span12: .entries
             for entry in category.entries
               .entry
                 form.delete-entity(method='post', action="/admin/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}")
@@ -41,14 +42,15 @@ block content
                   h4= entry.name
                 span.badge.pull-right= entry.votes
 
-        form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries", method='POST')
-          input.input-large(type='text', name='name', placeholder='Entry Name')
-          | &nbsp;
-          input(type='text', name='slug', placeholder='Instagram Slug')
-          = ' or '
-          input(type='text', name='image_url', placeholder='Photo URL')
-          | &nbsp;
-          input.btn(type='submit', value='Add')
+        .row: .span12
+          form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries", method='POST')
+            input.input-large(type='text', name='name', placeholder='Entry Name')
+            | &nbsp;
+            input(type='text', name='slug', placeholder='Instagram Slug')
+            = ' or '
+            input(type='text', name='image_url', placeholder='Photo URL')
+            | &nbsp;
+            input.btn(type='submit', value='Add')
 
   h5 Add Category to Contest
   form.form-inline(action="/admin/contests/#{contest.id}/categories", method='POST')
