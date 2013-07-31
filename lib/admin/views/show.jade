@@ -4,12 +4,13 @@ block footer
   != js('admin')
 
 block content
-  h2.factoryize.upcase= contest.name
-  p
-    | Open:&nbsp;
-    input#open-contest(type='checkbox', checked=contest.open ? 'checked' : undefined, data-contest=contest.id)
-    |  Show Results:&nbsp;
-    input#show-results(type='checkbox', checked=contest.show_results ? 'checked' : undefined, data-contest=contest.id)
+  .row: .span12
+    h2.factoryize.upcase= contest.name
+    p
+      | Open:&nbsp;
+      input#open-contest(type='checkbox', checked=contest.open ? 'checked' : undefined, data-contest=contest.id)
+      |  Show Results:&nbsp;
+      input#show-results(type='checkbox', checked=contest.show_results ? 'checked' : undefined, data-contest=contest.id)
 
   if contest.categories.length == 0
     p: small No categories
@@ -33,7 +34,8 @@ block content
               .entry
                 form.delete-entity(method='post', action="/admin/contests/#{contest.id}/categories/#{category.id}/entries/#{entry.id}")
                   input(type='hidden', name='_method', value='delete')
-                  input.btn(type='submit', value='Delete')
+                  button.btn.btn-small.dim(type='submit')
+                    i.icon-trash
                 if entry.slug
                   img.img-polaroid(src="http://instagr.am/p/#{entry.slug}/media/?size=t")
                 else if entry.image_url
@@ -52,8 +54,9 @@ block content
             | &nbsp;
             input.btn(type='submit', value='Add')
 
-  h5 Add Category to Contest
-  form.form-inline(action="/admin/contests/#{contest.id}/categories", method='POST')
-    input.input-large(type='text', name='name', placeholder='Category Name')
-    | &nbsp;
-    input.btn(type='submit', value='Create Category')
+  .row: .span12
+    h5 Add Category to Contest
+    form.form-inline(action="/admin/contests/#{contest.id}/categories", method='POST')
+      input.input-large(type='text', name='name', placeholder='Category Name')
+      | &nbsp;
+      input.btn(type='submit', value='Create Category')
