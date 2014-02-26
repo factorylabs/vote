@@ -6,6 +6,7 @@ app = module.exports = express()
 app.use(express.bodyParser())
 app.set('views', "#{__dirname}/views")
 app.set('view engine', 'jade')
+app.use(require('connect-assets')(helperContext: app.locals))
 
 app.get '/', (req, res) -> res.redirect('/contests')
 
@@ -27,7 +28,7 @@ app.get '/contests/:id', auth.ensureAuthenticated, (req, res) ->
 
 app.get '/contests/:id/leaderboard', (req, res) ->
   Contest.findById req.params.id, (err, contest) ->
-    res.render 'leaderboard'
+    res.render 'leaderboard',
       contest: contest
       user: req.user
       sort_desc: (prop) ->

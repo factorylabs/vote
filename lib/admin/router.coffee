@@ -7,6 +7,7 @@ app.use(express.bodyParser())
 app.use(express.methodOverride())
 app.set('views', "#{__dirname}/views")
 app.set('view engine', 'jade')
+app.use(require('connect-assets')(helperContext: app.locals))
 
 check_admin = [auth.ensureAuthenticated, auth.ensureAdmin]
 

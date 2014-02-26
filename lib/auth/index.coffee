@@ -17,6 +17,7 @@ domain = "http://#{domain}/"
 google_strategy_options =
   returnURL: "#{domain}auth/google/return"
   realm: domain
+
 passport.use new GoogleStrategy google_strategy_options, (identifier, profile, done) ->
   user_email = profile.emails[0].value
 
@@ -36,10 +37,11 @@ passport.use new GoogleStrategy google_strategy_options, (identifier, profile, d
 app = module.exports.Router = express()
 
 # configure Express
-app.use(express.cookieParser())
+secret = 'yellow snow'
+app.use(express.cookieParser(secret))
 app.use(express.bodyParser())
 app.use(express.methodOverride())
-app.use(express.session({secret: 'yellow snow'}))
+app.use(express.session({secret: secret}))
 # Initialize Passport!  Also use passport.session() middleware, to support
 # persistent login sessions (recommended).
 app.use(passport.initialize())
