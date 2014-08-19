@@ -1,0 +1,68 @@
+!!! 5
+html
+  head
+    title Vote
+    link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css')
+    script(src='http://fast.fonts.net/jsapi/8cc02e17-b4a8-499f-901f-9ff01da80d67.js')
+    != css('toolbar')
+    != css('application')
+
+    block head
+
+  body
+    nav.factory.navbar.navbar-default.navbar-fixed-top(role='navigation')
+
+      .container-fluid
+
+        .navbar-header
+
+          button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-ex1-collapse')
+            span.sr-only Toggle Navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+
+          ul.nav.navbar-nav
+            li.dropdown
+              a.navbar-brand.dropdown-toggle(href='/')
+                | Vote
+                // b.caret // optional
+              ul.dropdown-menu
+                li: a(href="http://corepilot.factorylabs.com") Core
+                li.divider
+                li: a(href="http://rocket.factorylabs.com") Rocket
+                li: a(href="http://gear.factorylabs.com") Gear
+                li: a(href="http://peeps.factorylabs.com") Peeps
+                li: a(href="https://support.factorylabs.com/forums") Support
+                li.divider
+                li: a(href="http://mail.factorylabs.com") Mail
+                li: a(href="http://calendar.factorylabs.com") Calendar
+                li: a(href="http://docs.factorylabs.com") GDrive
+
+        .navbar-ex1-collapse.navbar-collapse.collapse
+          ul.nav.navbar-nav.navbar-right
+            li.active: a(href="/foo") Foo
+            li.dropdown
+              a.dropdown-toggle(href="/bar", data-toggle="dropdown")
+                | Another Link
+                b.caret
+              ul.dropdown-menu
+                li: a(href="#") Links And
+                li: a(href="#") Links And
+                li: a(href="#") Links
+            li.dropdown
+              a.dropdown-toggle(href="/signout", data-toggle="dropdown")
+                | Sign out
+                b.caret
+              ul.dropdown-menu
+                li: a(href="#") Links And
+                li: a(href="#") Links And
+                li: a(href="#") Links
+
+    .container
+      block body
+
+    script(src='//code.jquery.com/jquery-1.11.1.min.js')
+    script(src='//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js')
+    != js('toolbar')
+    != js('application')
