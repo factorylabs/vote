@@ -1,10 +1,6 @@
 extends layout
 block body
   .row: .col-md-12
-    if error
-      .alert.alert-warning
-        button.close(type='button', data-dismiss='alert') &times;
-        = error
     p(style='text-align:center')
       a.btn.btn-default(href='/login')
         span.glyphicon.glyphicon-user

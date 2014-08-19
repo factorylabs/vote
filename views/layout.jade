@@ -60,6 +60,11 @@ html
                 li: a(href="#") Links
 
     .container
+      .row: .col-md-12
+        if error
+          .alert.alert-warning
+            button.close(type='button', data-dismiss='alert') &times;
+            = error
       block body
 
     script(src='//code.jquery.com/jquery-1.11.1.min.js')
