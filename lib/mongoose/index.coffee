@@ -1,6 +1,0 @@
-mongoose = module.exports = require('mongoose')
-uristring = process.env.MONGOLAB_URI or 'mongodb://localhost/vote'
-
-mongoose.connect uristring, (err, res) ->
-  if err
-    console.log('ERROR connecting to: ' + uristring + '. ' + err)
