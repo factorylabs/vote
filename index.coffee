@@ -3,6 +3,14 @@ env = process.env.NODE_ENV or 'development'
 express = require('express')
 config   = require('./config')
 
+db_config =
+  client: 'pg'
+  connection: config.pg_connection_string
+  debug: true
+
+pg = require('knex')(db_config)
+bookshelf = require('bookshelf')(pg)
+
 app = express()
 app.set('view engine', 'jade')
 app.use(express.static("#{__dirname}/public"))

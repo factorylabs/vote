@@ -3,7 +3,6 @@ express        = require('express')
 cookieParser   = require('cookie-parser')
 methodOverride = require('method-override')
 session        = require('express-session')
-# MongoStore     = require('connect-mongo')(session)
 User           = require('../models/user')
 config         = require('../config')
 
@@ -14,8 +13,7 @@ router.use(methodOverride())
 router.use(cookieParser(config.secret))
 router.use session
   secret: config.secret
-  store: new MongoStore
-    url: config.mongodb_uri
+  store: new (require('connect-pg-simple')(session))()
 
 # Ensure users are authenticated
 router.use (req, res, next) ->
