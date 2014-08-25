@@ -1,7 +1,7 @@
 {
   "name": "vote",
   "version": "0.2.0",
-  "description": "Node.js",
+  "description": "Factory employees vote on things.",
   "main": "index.coffee",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
