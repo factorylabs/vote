@@ -41,23 +41,10 @@ html
 
         .navbar-ex1-collapse.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
-            li.active: a(href="/foo") Foo
-            li.dropdown
-              a.dropdown-toggle(href="/bar", data-toggle="dropdown")
-                | Another Link
-                b.caret
-              ul.dropdown-menu
-                li: a(href="#") Links And
-                li: a(href="#") Links And
-                li: a(href="#") Links
-            li.dropdown
-              a.dropdown-toggle(href="/signout", data-toggle="dropdown")
-                | Sign out
-                b.caret
-              ul.dropdown-menu
-                li: a(href="#") Links And
-                li: a(href="#") Links And
-                li: a(href="#") Links
+            li: a(href="/vote") Contests
+            if user.is_admin()
+              li: a(href="/admin") Admin
+            li: a(href="/logout") Log Out
 
     .container
       .row: .col-md-12
