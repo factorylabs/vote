@@ -41,14 +41,12 @@ router.get '/login', (req, res) ->
 router.get '/session/remote', (req, res) ->
   auth = req.query
   shasum = crypto.createHash('sha1')
-  signature = "
-    #{auth['firstname']}\
-    #{auth['lastname']}\
-    #{auth['email']+auth['timestamp']}\
-    #{config.onelogin_token}
-  "
+  signature = auth['firstname']+auth['lastname']+auth['email']+auth['timestamp']+config.onelogin_token
+
   shasum.update(signature)
   signature = shasum.digest('hex')
+
+  return res.status(500)
 
   if signature is auth['signature']
     # trusted
