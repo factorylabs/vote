@@ -1,4 +1,4 @@
-User = require('../models/user')
+# User = require('../models/user')
 
 module.exports = router = require('express').Router()
 

@@ -1,6 +1,5 @@
 env = process.env.NODE_ENV or 'development'
 
-express = require('express')
 config   = require('./config')
 
 db_config =
@@ -10,6 +9,9 @@ db_config =
 
 pg = require('knex')(db_config)
 bookshelf = require('bookshelf')(pg)
+User = require('./models/user')(bookshelf)
+
+express = require('express')
 
 app = express()
 app.set('view engine', 'jade')
@@ -17,7 +19,7 @@ app.use(express.static("#{__dirname}/public"))
 app.use(require('connect-assets')(helperContext: app.locals))
 
 app.get('/', (req, res) -> res.redirect('/vote'))
-app.use(require('./lib/auth'))
+app.use(require('./lib/auth')(User))
 app.use('/vote', require('./routes/vote'))
 app.use('/admin', require('./routes/admin'))
 
