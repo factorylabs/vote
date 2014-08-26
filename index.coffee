@@ -1,13 +1,6 @@
-env = process.env.NODE_ENV or 'development'
-
 config   = require('./config')
 
-db_config =
-  client: 'pg'
-  connection: config.pg_connection_string
-  debug: true
-
-pg = require('knex')(db_config)
+pg = require('knex')(config.db)
 bookshelf = require('bookshelf')(pg)
 User = require('./models/user')(bookshelf)
 
@@ -23,7 +16,7 @@ app.use(require('./lib/auth')(User))
 app.use('/vote', require('./routes/vote'))
 app.use('/admin', require('./routes/admin'))
 
-if env is 'development'
+if config.env is 'development'
   # A simple log for dev mode
   app.use (req, res, next) ->
     console.log(req.method, req.url)

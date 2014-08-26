@@ -7,10 +7,9 @@ connect_pg     = require('connect-pg-simple')(session)
 config         = require('../config')
 
 module.exports = (User) ->
-
   router = express.Router()
 
-  # configure Express
+  # Configure Express
   router.use(methodOverride())
   router.use(cookieParser(config.secret))
   router.use session
@@ -78,7 +77,7 @@ module.exports = (User) ->
               req.session.user_id = saved_user.id
               res.redirect('/')
         .catch (err) ->
-          console.log(err)
+          console.log('[Auth Error]', err)
           res.status(500)
 
   router.get '/logout', (req, res) ->
