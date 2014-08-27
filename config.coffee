@@ -11,5 +11,6 @@ config =
 config.db =
   client: 'pg'
   connection: config.pg_connection_string
+  debug: true
 
 module.exports = config
