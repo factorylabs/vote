@@ -3,4 +3,7 @@
 module.exports = router = require('express').Router()
 
 router.get '/', (req, res) ->
-  res.render('vote')
+  req.user.load(['votes'])
+    .then (user) ->
+      req.user = res.locals.user = user
+      res.render('vote')
