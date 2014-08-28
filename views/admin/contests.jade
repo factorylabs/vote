@@ -1,0 +1,32 @@
+extends ../layout
+block body
+  .row
+    .col-md-8
+      table.table.table-bordered
+        thead
+          tr
+            th Name
+            th Status
+            th Entries
+        tbody
+          for contest in contests
+            tr
+              td
+                a(href="contests/#{contest.get('id')}")= contest.get('name')
+              td= contest.get('open') ? 'Open' : 'Closed'
+              td ?
+          if contests.length == 0
+            tr: td(colspan=3) No contests.
+
+    .col-md-4
+      .panel.panel-default
+        .panel-heading: h3.panel-title Create a New Contest
+        .panel-body
+          form(action='/admin/contests' method='POST')
+            .form-group
+              label Name
+              input.form-control(type='text' name='contest[name]')
+            input.btn.btn-default(type='submit')
+
+  .row: .col-md-12
+    p(style='text-align:center'): small Hooray, you're an admin.
