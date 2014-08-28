@@ -1,5 +1,38 @@
 extends ../layout
 block body
   .row
-    .col-md-12
-      h3= contest.get('name')
+    .col-md-8
+      h3= contest.name
+
+      for category in contest.categories
+        .category
+          h4= category.name
+          for entry in category.entries
+            h6
+              = entry.name
+              small= entry.attachment
+          if category.entries.length == 0
+            p: small No entries in this category
+          hr
+          p Add and entry
+          form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries" method='POST')
+            .row
+              .form-group.col-md-4
+                input.form-control(type='text' name='entry[name]' placeholder='Name')
+              .form-group.col-md-6
+                input.form-control(type='text' name='entry[attachment]' placeholder='Attachment')
+              .col-md-2
+                input.btn.btn-default(type='submit')
+
+      if contest.categories.length == 0
+        p: small There are no categories.
+
+    .col-md-4
+      .panel.panel-default
+        .panel-heading: h3.panel-title Create a Category
+        .panel-body
+          form(action="/admin/contests/#{contest.id}/categories" method='POST')
+            .form-group
+              label Category Name
+              input.form-control(type='text' name='category[name]')
+            input.btn.btn-default(type='submit')

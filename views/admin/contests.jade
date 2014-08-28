@@ -12,8 +12,8 @@ block body
           for contest in contests
             tr
               td
-                a(href="contests/#{contest.get('id')}")= contest.get('name')
-              td= contest.get('open') ? 'Open' : 'Closed'
+                a(href="contests/#{contest.id}")= contest.name
+              td= contest.open ? 'Open' : 'Closed'
               td ?
           if contests.length == 0
             tr: td(colspan=3) No contests.
@@ -24,7 +24,7 @@ block body
         .panel-body
           form(action='/admin/contests' method='POST')
             .form-group
-              label Name
+              label Contest Name
               input.form-control(type='text' name='contest[name]')
             input.btn.btn-default(type='submit')
 
