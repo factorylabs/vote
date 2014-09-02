@@ -10,6 +10,13 @@ router.get '/', (req, res) ->
     .fetchAll({where: open: true})
     .then (contests) ->
       if contests.length is 1
-        res.render('vote', {contests: contests.toJSON()})
-      else
         res.redirect("/contests/#{contests.first().get('id')}")
+      else
+        res.render('contests', {contests: contests.toJSON()})
+
+router.get '/:contest_id', (req, res) ->
+  Contest
+    .where({id: req.params.contest_id})
+    .fetch({withRelated: ['categories', 'categories.entries']})
+    .then (contest) ->
+      res.render('contest', {contest: contest.toJSON()})

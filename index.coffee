@@ -13,9 +13,9 @@ if config.env is 'development'
     console.log(req.method, req.url)
     next()
 
-app.get('/', (req, res) -> res.redirect('/vote'))
+app.get('/', (req, res) -> res.redirect('/contests'))
 app.use(require('./lib/auth'))
-app.use('/vote', require('./routes/vote'))
+app.use('/contests', require('./routes/contests'))
 app.use('/admin', require('./routes/admin'))
 
 app.listen config.port, ->
