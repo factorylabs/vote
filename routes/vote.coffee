@@ -1,9 +1,15 @@
-# User = require('../models/user')
+models = require('../models')
+Contest = models.Contest
+Category = models.Category
+Entry = models.Entry
 
 module.exports = router = require('express').Router()
 
 router.get '/', (req, res) ->
-  req.user.load(['votes'])
-    .then (user) ->
-      req.user = res.locals.user = user
-      res.render('vote')
+  Contest
+    .fetchAll({where: open: true})
+    .then (contests) ->
+      if contests.length is 1
+        res.render('vote', {contests: contests.toJSON()})
+      else
+        res.redirect("/contests/#{contests.first().get('id')}")
