@@ -2,18 +2,8 @@ extends layout
 block body
   .row
     .col-md-6.col-md-offset-3
-      table.table.table-bordered
-        thead
-          tr
-            th Name
-            th Status
-            th Entries
-        tbody
-          for contest in contests
-            tr
-              td
-                a(href="contests/#{contest.id}")= contest.name
-              td= contest.open ? 'Open' : 'Closed'
-              td ?
-          if contests.length == 0
-            tr: td(colspan=3) No contests.
+      h3 Open Contests
+      for contest in contests
+        p: a(href="contests/#{contest.id}")= contest.name
+      if contests.length == 0
+        p No contests.
