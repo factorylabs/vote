@@ -1,19 +1,7 @@
-Upload = require('s3-uploader')
+config = require('../config')
+knox = require('knox')
 
-module.exports = new Upload 'factory-vote',
-  awsBucketUrl: 'https://s3-us-east-1.amazonaws.com/factory-vote/',
-  awsBucketPath: 'entries/',
-  awsBucketAcl: 'public',
-
-  versions: [{
-    original: true
-  },{
-    suffix: '-large',
-    quality: 80
-    maxHeight: 1040,
-    maxWidth: 1040,
-  },{
-    suffix: '-small',
-    maxHeight: 320,
-    maxWidth: 320
-  }]
+module.exports = knox.createClient
+  key: config.aws_key_id
+  secret: config.aws_secret_key
+  bucket: 'factory-vote'

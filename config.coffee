@@ -9,6 +9,8 @@ config =
   pg_connection_string: process.env.DATABASE_URL or 'postgres://localhost:5432/vote'
   onelogin_url: if env isnt 'production' then 'https://app.onelogin.com/launch/394047' else 'https://app.onelogin.com/launch/394050'
   onelogin_token: if env isnt 'production' then 'foobar' else 'e2343142-ddee-400f-a3e1-cd410f0e32b6'
+  aws_key_id: process.env.AWS_ACCESS_KEY_ID
+  aws_secret_key: process.env.AWS_SECRET_ACCESS_KEY
 
 config.db =
   client: 'pg'
