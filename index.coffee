@@ -4,6 +4,7 @@ express = require('express')
 app = express()
 app.use(require('body-parser')())
 app.use(require('connect-assets')(helperContext: app.locals))
+app.use(require('multer')(dest: './tmp/'))
 app.use(express.static("#{__dirname}/public"))
 app.set('view engine', 'jade')
 

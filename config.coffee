@@ -1,3 +1,5 @@
+fs = require('fs')
+
 env = process.env.NODE_ENV or 'development'
 
 config =
@@ -12,5 +14,7 @@ config.db =
   client: 'pg'
   connection: config.pg_connection_string
   debug: true
+
+config = require('./env')(config) if fs.existsSync('./env.coffee')
 
 module.exports = config
