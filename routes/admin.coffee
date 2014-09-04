@@ -81,12 +81,9 @@ router.post '/contests/:contest_id/categories/:category_id/entries', (req, res) 
 router.delete '/contests/:contest_id/entries/:entry_id', (req, res) ->
   Entry
     .where({id: req.params.entry_id})
-    .fetch()
-    .then (entry) ->
-      entry
-        .destroy()
-        .then ->
-          res.redirect("/admin/contests/#{req.params.contest_id}")
+    .destroy()
+    .then ->
+      res.redirect("/admin/contests/#{req.params.contest_id}")
 
 # Close a contest
 router.post '/contests/:contest_id/close', (req, res) ->
