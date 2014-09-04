@@ -15,12 +15,12 @@ block body
             p: small No entries in this category
           hr
           p Add and entry
-          form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries" method='POST')
+          form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries" method='POST' enctype='multipart/form-data')
             .row
               .form-group.col-md-3
                 input.form-control(type='text' name='entry[name]' placeholder='Name')
               .form-group.col-md-3
-                input.form-control(type='text' name='entry[attachment]' placeholder='Attachment')
+                input.form-control(type='file' name='attachment')
               .col-md-4
                 input.btn.btn-default(type='submit' value='Add')
 

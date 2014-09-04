@@ -1,3 +1,4 @@
+s3 = require('../lib/s3')
 models = require('../models')
 Contest = models.Contest
 Category = models.Category
@@ -49,11 +50,28 @@ router.post '/contests/:contest_id/categories', (req, res) ->
 
 # Create an entry
 router.post '/contests/:contest_id/categories/:category_id/entries', (req, res) ->
+  attachment = req.files.attachment
+  # fieldname: 'attachment',
+  # originalname: 'balrog.jpg',
+  # name: '90d91fe89c6bcfbaf8fca1f644b1d7fc.jpg',
+  # encoding: '7bit',
+  # mimetype: 'image/jpeg',
+  # path: 'tmp/90d91fe89c6bcfbaf8fca1f644b1d7fc.jpg',
+  # extension: 'jpg',
+  # size: 173109,
+  # truncated: false
   new_entry = req.body.entry
   new_entry.category_id = req.params.category_id
   # new_entry.contest_id = req.params.contest_id
-  Entry
-    .forge(new_entry)
-    .save()
-    .then (saved_entry) ->
-      res.redirect("/admin/contests/#{req.params.contest_id}")
+
+  s3.upload attachment.path, {}, (e, images, meta) ->
+
+    console.log 'S3 ERROR!', e if e
+    console.log images, meta
+    return res.redirect("/admin/contests/#{req.params.contest_id}")
+
+    Entry
+      .forge(new_entry)
+      .save()
+      .then (saved_entry) ->
+        res.redirect("/admin/contests/#{req.params.contest_id}")

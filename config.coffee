@@ -13,7 +13,7 @@ config =
 config.db =
   client: 'pg'
   connection: config.pg_connection_string
-  debug: true
+  # debug: true
 
 config = require('./env')(config) if fs.existsSync('./env.coffee')
 
