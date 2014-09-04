@@ -2,6 +2,7 @@ config = require('./config')
 express = require('express')
 
 app = express()
+app.use(require('method-override')('_method'))
 app.use(require('body-parser')())
 app.use(require('connect-assets')(helperContext: app.locals))
 app.use(require('multer')(dest: './tmp/'))

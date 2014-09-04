@@ -12,6 +12,8 @@ block body
               code= entry.votes.length
               = ' ' + entry.name
               small= ' ' + entry.attachment
+              form.pull-right(action="/admin/contests/#{contest.id}/entries/#{entry.id}?_method=DELETE" method='POST')
+                input.btn.btn-xs.btn-danger(type='submit' value='x')
           if category.entries.length == 0
             p: small No entries in this category
           hr
