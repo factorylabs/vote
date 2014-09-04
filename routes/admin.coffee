@@ -35,7 +35,7 @@ router.post '/contests', (req, res) ->
 router.get '/contests/:contest_id', (req, res) ->
   Contest
     .where({id: req.params.contest_id})
-    .fetch({withRelated: ['categories', 'categories.entries']})
+    .fetch({withRelated: ['categories', 'categories.entries', 'categories.entries.votes']})
     .then (contest) ->
       res.render('admin/contest', {contest: contest.toJSON()})
 

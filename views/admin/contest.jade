@@ -9,7 +9,8 @@ block body
           h4= category.name
           for entry in category.entries
             h5
-              = entry.name
+              code= entry.votes.length
+              = ' ' + entry.name
               small= ' ' + entry.attachment
           if category.entries.length == 0
             p: small No entries in this category
