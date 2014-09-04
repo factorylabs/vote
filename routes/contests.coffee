@@ -7,7 +7,8 @@ module.exports = router = require('express').Router()
 
 router.get '/', (req, res) ->
   Contest
-    .fetchAll({where: open: true})
+    .where(open: true)
+    .fetchAll()
     .then (contests) ->
       if contests.length is 1
         res.redirect("/contests/#{contests.first().get('id')}")
