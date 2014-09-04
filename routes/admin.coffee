@@ -76,3 +76,14 @@ router.post '/contests/:contest_id/categories/:category_id/entries', (req, res) 
         res.redirect("/admin/contests/#{req.params.contest_id}", {error: s3res})
 
     s3req.end(buffer) # execute upload
+
+# Close a contest
+router.post '/contests/:contest_id/close', (req, res) ->
+  Contest
+    .where({id: req.params.contest_id})
+    .fetch()
+    .then (contest) ->
+      contest.set('open', false)
+      contest.save()
+      .then (contest) ->
+        res.redirect('/admin/')

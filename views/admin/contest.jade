@@ -36,3 +36,10 @@ block body
               label Category Name
               input.form-control(type='text' name='category[name]')
             input.btn.btn-default(type='submit' value='Create')
+
+      .panel.panel-danger
+        .panel-heading: h3.panel-title Close Contest
+        .panel-body
+          p Prevent further voting for this contest.
+          form(action="/admin/contests/#{contest.id}/close" method='POST')
+            input.btn.btn-danger(type='submit' value='Close it!')
