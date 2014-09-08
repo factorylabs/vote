@@ -1,6 +1,6 @@
 extends layout
 block body
-  .row: .col-md-12
+  .row#contest: .col-md-12
     h3= contest.name
 
     for category in contest.categories
@@ -8,8 +8,8 @@ block body
         h4= category.name
         .row
           for entry in category.entries
-            .col-md-3
-              a.thumbnail.vote(href='#')
+            .entry.col-md-3
+              a.thumbnail(href='#' data-entry=entry)
                 img(src=entry.attachment)
                 .caption: h5= entry.name
         if category.entries.length == 0
