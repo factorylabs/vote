@@ -1,18 +1,19 @@
 extends layout
 block body
-  .row
-    .col-md-6.col-md-offset-3
-      h3= contest.name
+  .row: .col-md-12
+    h3= contest.name
 
-      for category in contest.categories
-        .category
-          h4= category.name
+    for category in contest.categories
+      .category
+        h4= category.name
+        .row
           for entry in category.entries
-            h6
-              = entry.name
-              small= ' ' + entry.attachment
-          if category.entries.length == 0
-            p: small No entries in this category
+            .col-md-3
+              a.thumbnail.vote(href='#')
+                img(src=entry.attachment)
+                .caption: h5= entry.name
+        if category.entries.length == 0
+          p: small No entries in this category
 
-      if contest.categories.length == 0
-        p: small There are no categories.
+    if contest.categories.length == 0
+      p: small There are no categories.
