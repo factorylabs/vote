@@ -85,6 +85,17 @@ router.delete '/contests/:contest_id/entries/:entry_id', (req, res) ->
     .then ->
       res.redirect("/admin/contests/#{req.params.contest_id}")
 
+# Open a contest
+router.post '/contests/:contest_id/open', (req, res) ->
+  Contest
+    .where({id: req.params.contest_id})
+    .fetch()
+    .then (contest) ->
+      contest.set('open', true)
+      contest.save()
+      .then (contest) ->
+        res.redirect('/admin/')
+
 # Close a contest
 router.post '/contests/:contest_id/close', (req, res) ->
   Contest

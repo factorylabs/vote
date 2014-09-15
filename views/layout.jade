@@ -41,10 +41,11 @@ html
 
         .navbar-ex1-collapse.navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
-            li: a(href="/") Contests
-            if user.is_admin()
-              li: a(href="/admin") Admin
-            li: a(href="/logout") Log Out
+            if user
+              li: a(href="/") Contests
+              if user.is_admin()
+                li: a(href="/admin") Admin
+              li: a(href="/logout") Log Out
 
     .container
       .row: .col-md-12
