@@ -1,6 +1,6 @@
 extends layout
 block body
-  .row#contest: .col-md-12
+  .row#contest(data-id=contest.id): .col-md-12
     h3= contest.name
 
     for category in contest.categories
@@ -8,8 +8,8 @@ block body
         h4= category.name
         .row
           for entry in category.entries
-            .entry.col-md-3
-              a.thumbnail(href='#' data-entry=entry)
+            .entry.col-md-3(data-entry=entry)
+              a.thumbnail(href='#')
                 img(src=entry.attachment)
                 .caption: h5= entry.name
         if category.entries.length == 0
@@ -17,3 +17,6 @@ block body
 
     if contest.categories.length == 0
       p: small There are no categories.
+
+  .row: .col-md-12
+    a.btn.btn-primary#submit-vote Vote
