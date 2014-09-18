@@ -49,6 +49,14 @@ router.post '/contests/:contest_id/categories', (req, res) ->
     .then (saved_category) ->
       res.redirect("/admin/contests/#{req.params.contest_id}")
 
+# Delete an category
+router.delete '/contests/:contest_id/categories/:category_id', (req, res) ->
+  Category
+    .where({id: req.params.category_id})
+    .destroy()
+    .then ->
+      res.redirect("/admin/contests/#{req.params.contest_id}")
+
 # Create an entry
 router.post '/contests/:contest_id/categories/:category_id/entries', (req, res) ->
   attachment = req.files.attachment
@@ -72,7 +80,7 @@ router.post '/contests/:contest_id/categories/:category_id/entries', (req, res) 
           .then (saved_entry) ->
             res.redirect("/admin/contests/#{req.params.contest_id}")
       else
-        console.log 'S3 ERROR!', s3res
+        console.log('S3 ERROR!', s3res)
         res.redirect("/admin/contests/#{req.params.contest_id}", {error: s3res})
 
     s3req.end(buffer) # execute upload
