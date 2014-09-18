@@ -54,7 +54,7 @@ router.post '/contests/:contest_id/categories/:category_id/entries', (req, res) 
   attachment = req.files.attachment
   new_entry = req.body.entry
   new_entry.category_id = req.params.category_id
-  # new_entry.contest_id = req.params.contest_id
+  new_entry.contest_id = req.params.contest_id
 
   fs.readFile attachment.path, (err, buffer) ->
     filename = attachment.name.replace('.'+attachment.extension,'')+attachment.originalname

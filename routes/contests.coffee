@@ -29,6 +29,7 @@ router.post '/:contest_id/vote', (req, res) ->
   votes = 0
   for entry in entries
     new_vote =
+      contest_id: req.params.contest_id
       entry_id: entry.id
       user_id: current_user.get('id')
 

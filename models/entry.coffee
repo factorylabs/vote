@@ -3,6 +3,9 @@ module.exports = (bookshelf) ->
     tableName: 'entries'
     hasTimestamps: true
 
+    contest: ->
+      @belongsTo('Contest', 'contest_id')
+
     category: ->
       @belongsTo('Category', 'category_id')
 

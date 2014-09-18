@@ -6,6 +6,9 @@ module.exports = (bookshelf) ->
     user: ->
       @belongsTo('User', 'user_id')
 
+    contest: ->
+      @belongsTo('Contest', 'contest_id')
+
     entry: ->
       @belongsTo('Entry', 'entry_id')
 
