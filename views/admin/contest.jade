@@ -34,25 +34,26 @@ block body
         p: small There are no categories.
 
     .col-md-4
-      .panel.panel-default
-        .panel-heading: h3.panel-title Create a Category
-        .panel-body
-          form(action="/admin/contests/#{contest.id}/categories" method='POST')
-            .form-group
-              label Category Name
-              input.form-control(type='text' name='category[name]')
-            input.btn.btn-default(type='submit' value='Create')
-
-      .panel.panel-danger
-        if contest.open
+      if contest.open
+        .panel.panel-danger
           .panel-heading: h3.panel-title Close Contest
           .panel-body
             p Prevent further voting for this contest.
             form(action="/admin/contests/#{contest.id}/close" method='POST')
               input.btn.btn-danger(type='submit' value='Close it!')
-        else
+      else
+        .panel.panel-default
+          .panel-heading: h3.panel-title Create a Category
+          .panel-body
+            form(action="/admin/contests/#{contest.id}/categories" method='POST')
+              .form-group
+                label Category Name
+                input.form-control(type='text' name='category[name]')
+              input.btn.btn-default(type='submit' value='Create')
+
+        .panel.panel-success
           .panel-heading: h3.panel-title Open Contest
           .panel-body
             p Open this contest for user voting.
             form(action="/admin/contests/#{contest.id}/open" method='POST')
-              input.btn.btn-danger(type='submit' value='Open it!')
+              input.btn.btn-success(type='submit' value='Open it!')
