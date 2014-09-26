@@ -4,9 +4,10 @@ $ ->
   if voting
     contest_id = $('#contest').data('id')
 
-    $('.entry a.thumbnail').click ->
+    $('.entry .thumbnail').click ->
       $entry = $(@).parent('.entry')
 
+      $entry.parent().addClass('voting')
       $entry.addClass('selected')
       $entry.siblings().removeClass('selected')
 

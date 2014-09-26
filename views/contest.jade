@@ -9,7 +9,7 @@ block body
         .row
           for entry in category.entries
             .entry.col-md-3(data-entry=entry)
-              a.thumbnail(href='#')
+              .thumbnail(href='#')
                 img(src=entry.attachment)
                 .caption: h5= entry.name
         if category.entries.length == 0
