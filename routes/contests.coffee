@@ -22,7 +22,6 @@ router.get '/:contest_id', (req, res) ->
     .fetch({withRelated: ['categories.entries', 'votes']})
     .then (contest) ->
       already_voted = contest.already_voted_by(req.user)
-      console.log already_voted
       contest = contest.toJSON()
       contest.already_voted = already_voted
       res.render('contest', {contest: contest})

@@ -2,7 +2,6 @@ $ ->
   voting = $('#contest').length > 0 && $('#contest').data('id')
 
   if voting
-    console.log 'VOTING'
     contest_id = $('#contest').data('id')
 
     $('.entry .thumbnail').click ->

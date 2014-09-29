@@ -15,9 +15,7 @@ module.exports = (bookshelf) ->
     already_voted_by: (user) ->
       voted = false
       for vote in @related('votes').toJSON()
-        console.log vote.user_id
         if vote.user_id is user.id
-          console.log 'found a vote'
           voted = true
           break
       return voted
