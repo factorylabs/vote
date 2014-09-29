@@ -1,6 +1,6 @@
 extends layout
 block body
-  .row#contest(data-id=contest.id): .col-md-12
+  .row#contest(data-id=(contest.already_voted ? false : contest.id)): .col-md-12
     h3= contest.name
 
     for category in contest.categories
@@ -19,4 +19,7 @@ block body
       p: small There are no categories.
 
   .row: .col-md-12
-    a.btn.btn-primary#submit-vote Vote
+    if contest.already_voted
+      a.btn.btn-default.disabled Already Voted
+    else
+      a.btn.btn-primary#submit-vote Vote

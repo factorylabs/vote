@@ -19,9 +19,13 @@ router.get '/', (req, res) ->
 router.get '/:contest_id', (req, res) ->
   Contest
     .where({id: req.params.contest_id})
-    .fetch({withRelated: ['categories.entries']})
+    .fetch({withRelated: ['categories.entries', 'votes']})
     .then (contest) ->
-      res.render('contest', {contest: contest.toJSON()})
+      already_voted = contest.already_voted_by(req.user)
+      console.log already_voted
+      contest = contest.toJSON()
+      contest.already_voted = already_voted
+      res.render('contest', {contest: contest})
 
 router.post '/:contest_id/vote', (req, res) ->
   entries = req.body.entries
