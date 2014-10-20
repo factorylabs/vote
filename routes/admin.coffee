@@ -64,26 +64,32 @@ router.post '/contests/:contest_id/categories/:category_id/entries', (req, res) 
   new_entry.category_id = req.params.category_id
   new_entry.contest_id = req.params.contest_id
 
-  fs.readFile attachment.path, (err, buffer) ->
-    filename = attachment.name.replace('.'+attachment.extension,'')+attachment.originalname
-    s3req = s3.put "/entries/#{filename}",
-      'Content-Length': buffer.length
-      'Content-Type': attachment.mimetype
-      'x-amz-acl': 'public-read'
+  send_response = ->
+    Entry
+      .forge(new_entry)
+      .save()
+      .then (saved_entry) ->
+        res.redirect("/admin/contests/#{req.params.contest_id}")
 
-    s3req.on 'response', (s3res) ->
-      if s3res.statusCode is 200
-        new_entry.attachment = s3req.url
-        Entry
-          .forge(new_entry)
-          .save()
-          .then (saved_entry) ->
-            res.redirect("/admin/contests/#{req.params.contest_id}")
-      else
-        console.log('S3 ERROR!', s3res)
-        res.redirect("/admin/contests/#{req.params.contest_id}", {error: s3res})
+  if attachment
+    fs.readFile attachment.path, (err, buffer) ->
+      filename = attachment.name.replace('.'+attachment.extension,'')+attachment.originalname
+      s3req = s3.put "/entries/#{filename}",
+        'Content-Length': buffer.length
+        'Content-Type': attachment.mimetype
+        'x-amz-acl': 'public-read'
 
-    s3req.end(buffer) # execute upload
+      s3req.on 'response', (s3res) ->
+        if s3res.statusCode is 200
+          new_entry.attachment = s3req.url
+          send_response()
+        else
+          console.log('S3 ERROR!', s3res)
+          res.redirect("/admin/contests/#{req.params.contest_id}", {error: s3res})
+
+      s3req.end(buffer) # execute upload
+  else
+    send_response()
 
 # Delete an entry
 router.delete '/contests/:contest_id/entries/:entry_id', (req, res) ->
