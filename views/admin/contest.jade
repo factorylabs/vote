@@ -14,21 +14,24 @@ block body
               small= ' ' + entry.attachment
               form.pull-right(action="/admin/contests/#{contest.id}/entries/#{entry.id}?_method=DELETE" method='POST')
                 input.btn.btn-xs.btn-danger(type='submit' value='x')
+
           if category.entries.length == 0
             p: small No entries in this category
-          hr
-          h6 Add and entry
-          form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries" method='POST' enctype='multipart/form-data')
-            .row
-              .form-group.col-md-4
-                input.form-control(type='text' name='entry[name]' placeholder='Name')
-              .form-group.col-md-6
-                input.form-control(type='file' name='attachment')
-              .col-md-2
-                input.btn.btn-default(type='submit' value='Add')
-          hr
-          form(action="/admin/contests/#{contest.id}/categories/#{category.id}?_method=DELETE" method='POST')
-            input.btn.btn-sm.btn-danger(type='submit' value='Delete Category')
+
+          if !contest.open
+            hr
+            h6 Add and entry
+            form.form-inline(action="/admin/contests/#{contest.id}/categories/#{category.id}/entries" method='POST' enctype='multipart/form-data')
+              .row
+                .form-group.col-md-4
+                  input.form-control(type='text' name='entry[name]' placeholder='Name')
+                .form-group.col-md-6
+                  input.form-control(type='file' name='attachment')
+                .col-md-2
+                  input.btn.btn-default(type='submit' value='Add')
+            hr
+            form(action="/admin/contests/#{contest.id}/categories/#{category.id}?_method=DELETE" method='POST')
+              input.btn.btn-sm.btn-danger(type='submit' value='Delete Category')
 
       if contest.categories.length == 0
         p: small There are no categories.
