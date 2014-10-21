@@ -19,6 +19,6 @@ $ ->
 
       $.post "/contests/#{contest_id}/vote", entries: entries
         .success ->
-          alert 'voted!'
+          window.location.reload(true)
         .error ->
-          alert 'error'
+          alert 'Error submitting vote. Refresh and try again.'
