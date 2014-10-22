@@ -6,12 +6,18 @@ block body
     for category in contest.categories
       .category
         h4= category.name
-        .row
-          for entry in category.entries
-            .entry.col-md-3(data-entry=entry)
-              .thumbnail(href='#')
-                img(src=entry.attachment)
-                .caption: h5= entry.name
+        - var n = 0
+        - var entries_per_row = 4
+        - var row_count = Math.ceil(category.entries.length/entries_per_row)
+        while n < row_count
+          .row
+            for entry in category.entries.slice(n*entries_per_row, (n+1)*entries_per_row)
+              .entry.col-md-3(data-entry=entry)
+                .thumbnail(href='#')
+                  img(src=entry.attachment)
+                  .caption: h5= entry.name
+          - n++
+
         if category.entries.length == 0
           p: small No entries in this category
 
