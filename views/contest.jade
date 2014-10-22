@@ -1,5 +1,11 @@
 extends layout
 block body
+  if contest.already_voted
+    .row: .col-md-6.col-md-offset-3
+      .alert.alert-info
+        strong Thanks for voting!
+        |  You can only vote once in a contest.
+
   .row#contest(data-id=(contest.already_voted ? false : contest.id)): .col-md-12
     h3= contest.name
 
@@ -26,6 +32,6 @@ block body
 
   .row: .col-md-12
     if contest.already_voted
-      a.btn.btn-primary.disabled Already Voted
+      a.btn.btn-primary.disabled You've Already Voted
     else
-      a.btn.btn-primary#submit-vote Vote
+      a.btn.btn-primary#submit-vote Submit Vote!
