@@ -18,6 +18,8 @@ router.use (req, res, next) ->
 router.get('/', (req,res) -> res.redirect('/admin/contests'))
 router.get '/contests', (req, res) ->
   Contest
+    .query (qb) ->
+      qb.orderBy('created_at', 'DESC')
     .fetchAll()
     .then (contests) ->
       res.render('admin/contests', {contests: contests.toJSON()})
