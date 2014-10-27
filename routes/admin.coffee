@@ -29,7 +29,7 @@ router.post '/contests', (req, res) ->
     .forge(new_contest)
     .save()
     .then (saved_contest) ->
-      res.redirect("contests/#{saved_contest.get('id')}")
+      res.redirect("/admin/contests/#{saved_contest.get('id')}")
 
 # Show a contest
 router.get '/contests/:contest_id', (req, res) ->
@@ -108,7 +108,7 @@ router.post '/contests/:contest_id/open', (req, res) ->
       contest.set('open', true)
       contest.save()
       .then (contest) ->
-        res.redirect('/admin/')
+        res.redirect("/admin/contests/#{req.params.contest_id}")
 
 # Close a contest
 router.post '/contests/:contest_id/close', (req, res) ->
@@ -119,4 +119,4 @@ router.post '/contests/:contest_id/close', (req, res) ->
       contest.set('open', false)
       contest.save()
       .then (contest) ->
-        res.redirect('/admin/')
+        res.redirect("/admin/contests/#{req.params.contest_id}")
