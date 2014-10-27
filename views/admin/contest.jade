@@ -2,21 +2,29 @@ extends ../layout
 block body
   .row
     .col-md-8
-      h3= contest.name
+      h2= contest.name
+
 
       for category in contest.categories
         .admin-category
-          h4= category.name
-          for entry in category.entries
-            h5
-              code= entry.votes.length
-              = ' ' + entry.name
-              small= ' ' + entry.attachment
-              form.pull-right(action="/admin/contests/#{contest.id}/entries/#{entry.id}?_method=DELETE" method='POST')
-                input.btn.btn-xs.btn-danger(type='submit' value='x')
-
-          if category.entries.length == 0
-            p: small No entries in this category
+          form.pull-right(action="/admin/contests/#{contest.id}/categories/#{category.id}?_method=DELETE" method='POST')
+            input.btn.btn-xs.btn-default(type='submit' value='Delete Category')
+          h3= category.name
+          - var n = 0
+          - var entries_per_row = 4
+          - var row_count = Math.ceil(category.entries.length/entries_per_row)
+          while n < row_count
+            .row
+              for entry in category.entries.slice(n*entries_per_row, (n+1)*entries_per_row)
+                .entry.col-md-3(data-entry=entry)
+                  .thumbnail(href='#')
+                    img(src=entry.attachment)
+                    .caption
+                      h5= entry.name
+                      code= entry.votes.length
+                      form.pull-right(action="/admin/contests/#{contest.id}/entries/#{entry.id}?_method=DELETE" method='POST')
+                        input.btn.btn-xs.btn-danger(type='submit' value='x')
+            - n++
 
           if !contest.open
             hr
@@ -29,9 +37,9 @@ block body
                   input.form-control(type='file' name='attachment')
                 .col-md-2
                   input.btn.btn-default(type='submit' value='Add')
-            hr
-            form(action="/admin/contests/#{contest.id}/categories/#{category.id}?_method=DELETE" method='POST')
-              input.btn.btn-sm.btn-danger(type='submit' value='Delete Category')
+
+        if category.entries.length == 0
+          p: small No entries in this category
 
       if contest.categories.length == 0
         p: small There are no categories.
