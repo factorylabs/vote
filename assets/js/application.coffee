@@ -6,10 +6,11 @@ $ ->
 
     $('.entry .thumbnail').click ->
       $entry = $(@).parent('.entry')
+      $category = $entry.closest('.category')
 
-      $entry.parent().addClass('voting')
+      $category.addClass('voting')
+      $category.find('.entry').removeClass('selected')
       $entry.addClass('selected')
-      $entry.siblings().removeClass('selected')
 
     $('#submit-vote').one 'click', ->
       $selected_entries = $('.entry.selected')
