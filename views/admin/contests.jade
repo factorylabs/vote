@@ -1,7 +1,8 @@
 extends ../layout
 block body
   .row
-    .col-md-8
+    .col-md-8: .box
+      h3.box-title All Contests
       table.table.table-bordered
         thead
           tr
@@ -19,7 +20,7 @@ block body
             tr: td(colspan=3) No contests.
 
     .col-md-4
-      .panel.panel-default
+      .panel.panel-info
         .panel-heading: h3.panel-title Create a New Contest
         .panel-body
           form(action='/admin/contests' method='POST')

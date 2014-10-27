@@ -6,32 +6,31 @@ block body
         strong Thanks for voting!
         |  You can only vote once in a contest.
 
-  .row#contest(data-id=(contest.already_voted ? false : contest.id)): .col-md-12
-    h3= contest.name
+  .row#contest(data-id=(contest.already_voted ? false : contest.id))
+    .col-md-12
+      h1.big-title= contest.name
 
-    for category in contest.categories
-      .category
-        h4= category.name
-        - var n = 0
-        - var entries_per_row = 4
-        - var row_count = Math.ceil(category.entries.length/entries_per_row)
-        while n < row_count
-          .row
-            for entry in category.entries.slice(n*entries_per_row, (n+1)*entries_per_row)
-              .entry.col-md-3(data-entry=entry)
-                .thumbnail(href='#')
-                  img(src=entry.attachment)
-                  .caption: h5= entry.name
-          - n++
+      for category in contest.categories
+        .category.box
+          h3.box-title= category.name
+          - var n = 0
+          - var entries_per_row = 4
+          - var row_count = Math.ceil(category.entries.length/entries_per_row)
+          while n < row_count
+            .row
+              for entry in category.entries.slice(n*entries_per_row, (n+1)*entries_per_row)
+                .entry.col-md-3(data-entry=entry)
+                  .thumbnail(href='#')
+                    img(src=entry.attachment)
+                    .caption: h5= entry.name
+            - n++
 
-        if category.entries.length == 0
-          p: small No entries in this category
+          if category.entries.length == 0
+            p: small No entries in this category
 
-    if contest.categories.length == 0
-      p: small There are no categories.
+      if contest.categories.length == 0
+        p: small There are no categories.
 
   .row: .col-md-12
-    if contest.already_voted
-      a.btn.btn-primary.disabled You've Already Voted
-    else
+    if !contest.already_voted
       a.btn.btn-primary#submit-vote Submit Vote!
