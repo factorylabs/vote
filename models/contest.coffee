@@ -13,6 +13,8 @@ module.exports = (bookshelf) ->
       @hasMany('Vote', 'contest_id')
 
     already_voted_by: (user) ->
+      return false if user.is_admin()
+
       voted = false
       for vote in @related('votes').toJSON()
         if vote.user_id is user.id
