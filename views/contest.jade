@@ -22,7 +22,8 @@ block body
                 .entry.col-md-3(data-entry=entry)
                   .thumbnail(href='#')
                     img(src=entry.attachment)
-                    .caption: h5= entry.name
+                    if entry.name
+                      .caption: h5= entry.name
             - n++
 
           if category.entries.length == 0
