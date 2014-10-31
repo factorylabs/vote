@@ -1,7 +1,7 @@
 exports.up = (knex, Promise) ->
   knex.schema.createTable 'entries', (table) ->
     table.increments()
-    table.string('name').notNullable()
+    table.string('name')
     table.string('attachment')
     table.integer('category_id').notNullable()
     table.timestamps()
