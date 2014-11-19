@@ -26,6 +26,17 @@ router.get '/:contest_id', (req, res) ->
       contest.already_voted = already_voted
       res.render('contest', {contest: contest})
 
+router.get '/:contest_id/results', (req, res) ->
+  if req.user.is_admin()
+    Contest
+      .where({id: req.params.contest_id})
+      .fetch({withRelated: ['categories.entries.votes', 'votes']})
+      .then (contest) ->
+        contest = contest.toJSON()
+        res.render('results', {contest: contest})
+  else
+    res.end()
+
 router.post '/:contest_id/vote', (req, res) ->
   entries = req.body.entries
   current_user = req.user
