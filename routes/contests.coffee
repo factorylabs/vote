@@ -33,6 +33,11 @@ router.get '/:contest_id/results', (req, res) ->
       .fetch({withRelated: ['categories.entries.votes', 'votes']})
       .then (contest) ->
         contest = contest.toJSON()
+
+        for category in contest.categories
+          category.entries.sort (a, b) ->
+            b.votes.length - a.votes.length
+
         res.render('results', {contest: contest})
   else
     res.end()
