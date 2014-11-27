@@ -1,3 +1,5 @@
+config = require('../config')
+
 module.exports = (bookshelf) ->
   User = bookshelf.Model.extend
     tableName: 'users'
@@ -8,13 +10,7 @@ module.exports = (bookshelf) ->
 
     is_admin: ->
       return @admin if @admin?
-      admins = [
-        'taylor.beseda'
-        'ryan.colley'
-        'lindsey.ritter'
-        'jon.poplar'
-      ]
       user = @get('email').replace('@factorylabs.com','')
-      return @admin = admins.indexOf(user) > -1
+      return @admin = config.admins.indexOf(user) > -1
 
   return User
