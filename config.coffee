@@ -14,7 +14,7 @@ config =
   admins: [
     'taylor.beseda'
     'ryan.colley'
-    'lindsey.ritter'
+    'hadley.siegel'
     'jon.poplar'
   ]
 
