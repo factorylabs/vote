@@ -12,10 +12,8 @@ config =
   aws_key_id: process.env.AWS_ACCESS_KEY_ID # null in dev, create an env.coffee
   aws_secret_key: process.env.AWS_SECRET_ACCESS_KEY # null in dev, create an env.coffee
   admins: [
-    'taylor.beseda'
-    'ryan.colley'
-    'hadley.siegel'
-    'jon.poplar'
+    'jon.smith'
+    'jane.smith'
   ]
 
 config.db =
